@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Perplexity Computer -->
+<meta name="generator" content="Perplexity Computer">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeadyAI — Intelligence Routing Hub</title>
+  <meta name="description" content="HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.">
+  <meta name="theme-color" content="#A855F7">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='#A855F7'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #A855F7;
+      --accent2: #7C3AED;
+      --bg: #0a0a0f;
+      --surface: rgba(255,255,255,0.04);
+      --surface-2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.08);
+      --text: #e2e8f0;
+      --text-muted: rgba(226,232,240,0.6);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Animated Background ── */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite;
+    }
+    .bg-orb-1 {
+      width: 600px; height: 600px;
+      background: var(--accent);
+      top: -200px; left: -200px;
+      animation-delay: 0s;
+    }
+    .bg-orb-2 {
+      width: 500px; height: 500px;
+      background: var(--accent2);
+      bottom: -150px; right: -150px;
+      animation-delay: -6s;
+    }
+    .bg-orb-3 {
+      width: 300px; height: 300px;
+      background: var(--accent);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -3s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* ── Layout ── */
+    .site-wrap {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.7);
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      flex: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    .hero-title {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      opacity: 0.9;
+    }
+    .cta-secondary {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .cta-secondary:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: var(--surface);
+    }
+
+    /* ── Glassmorphism Card ── */
+    .glass-card {
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 80px 0;
+    }
+    .features-heading {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .features-heading h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .features-heading p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent);
+      background: var(--surface-2);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .feature-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Network ── */
+    .network {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+    .network h3 {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .network-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .network-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .network-link:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-copy a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-copy a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <div class="site-wrap">
+    <nav>
+      <a href="/" class="nav-brand">HeadyAI</a>
+      <div class="nav-links">
+        <a href="https://headyapi.com" class="nav-link">HeadyAPI</a>
+<a href="https://headyme.com" class="nav-link">HeadyMe</a>
+<a href="https://headysystems.com" class="nav-link">HeadySystems</a>
+
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-badge">Heady™ Platform</div>
+      <h1 class="hero-title">
+        <span class="accent">Intelligence Routing Hub</span>
+      </h1>
+      <p class="hero-desc">HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.</p>
+      <div class="hero-cta">
+        
+      <a href="https://headyme.com" class="cta-btn">Get Started</a>
+        <a href="https://headysystems.com" class="cta-secondary">Learn More</a>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="features">
+        <div class="features-heading">
+          <h2>What We Offer</h2>
+          <p>Powered by Heady™ Liquid Latent OS</p>
+        </div>
+        <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔀</div>
+          <div class="feature-title">Intelligent Routing</div>
+          <div class="feature-desc">φ-optimized routing across 8+ AI providers for lowest latency and best quality.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧬</div>
+          <div class="feature-title">CSL Adaptive</div>
+          <div class="feature-desc">Crystallized State Logic adapts routing pressure based on real-time signals.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-title">Multi-Provider</div>
+          <div class="feature-desc">GPT-4, Claude, Gemini, Groq, Perplexity — all unified under one API.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Auto-Scaling</div>
+          <div class="feature-desc">Elastic capacity with Fibonacci-scheduled concurrency and self-healing nodes.</div>
+        </div>
+        </div>
+      </section>
+
+      <section class="network">
+        <h3>Heady Network</h3>
+        <div class="network-links">
+          <a href="https://headyme.com" class="network-link">HeadyMe</a>
+          <a href="https://headysystems.com" class="network-link">HeadySystems</a>
+          <a href="https://headybuddy.org" class="network-link">HeadyBuddy</a>
+          <a href="https://headyapi.com" class="network-link">HeadyAPI</a>
+          <a href="https://headybot.com" class="network-link">HeadyBot</a>
+          <a href="https://headyai.com" class="network-link">HeadyAI</a>
+          <a href="https://discord.headysystems.com" class="network-link">Discord</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <span class="footer-brand">HeadyAI</span>
+      <span class="footer-copy">
+        &copy; 2026 Heady Systems. All rights reserved. &nbsp;|&nbsp;
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+      </span>
+    </footer>
+  </div>
+
+  <script src="https://api.headysystems.com/buddy-widget.js"></script>
+</body>
+</html>
