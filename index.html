@@ -8,7 +8,7 @@
   <title>HeadyAI — Intelligence Routing Hub</title>
   <meta name="description" content="HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.">
   <meta name="theme-color" content="#A855F7">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='#A855F7'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23A855F7'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
       --border: rgba(255,255,255,0.08);
       --text: #e2e8f0;
       --text-muted: rgba(226,232,240,0.6);
+      --sidebar-width: 260px;
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -78,11 +79,6 @@
       flex-direction: column;
       min-height: 100vh;
     }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
 
     /* ── Nav ── */
     nav {
@@ -126,6 +122,93 @@
       background: var(--surface-2);
     }
 
+    /* ── Sidebar ── */
+    .sidebar {
+      position: fixed;
+      top: 65px;
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - 65px);
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      z-index: 90;
+      padding: 24px 0;
+    }
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0 24px;
+      margin-bottom: 12px;
+    }
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .sidebar-nav a {
+      display: block;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 24px;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      color: var(--text);
+      background: var(--surface);
+      border-left-color: var(--accent);
+    }
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    /* ── Mobile sidebar toggle ── */
+    .sidebar-toggle {
+      display: none;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .sidebar-toggle:hover {
+      background: var(--surface);
+      border-color: var(--accent);
+    }
+
+    /* ── Main Content Area ── */
+    .main-content {
+      margin-left: var(--sidebar-width);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
     /* ── Hero ── */
     .hero {
       display: flex;
@@ -133,7 +216,6 @@
       align-items: center;
       text-align: center;
       padding: 120px 24px 80px;
-      flex: 1;
     }
     .hero-badge {
       display: inline-flex;
@@ -277,6 +359,71 @@
       line-height: 1.6;
     }
 
+    /* ── Documentation Sections ── */
+    .doc-sections {
+      padding: 40px 0 80px;
+    }
+    .doc-sections section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 16px;
+    }
+    .doc-sections section h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 700px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .arch-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+    .arch-card:hover {
+      border-color: var(--accent);
+      background: var(--surface-2);
+      transform: translateY(-4px);
+    }
+    .arch-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .arch-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .arch-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     /* ── Network ── */
     .network {
       padding: 60px 0;
@@ -343,10 +490,27 @@
     }
     .footer-copy a:hover { color: var(--text); }
 
+    /* ── Mobile Responsive ── */
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar-toggle {
+        display: flex;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+    }
     @media (max-width: 640px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
       footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+      .hero { padding: 80px 20px 60px; }
     }
   </style>
 </head>
@@ -357,81 +521,408 @@
 
   <div class="site-wrap">
     <nav>
-      <a href="/" class="nav-brand">HeadyAI</a>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Toggle sidebar">&#9776;</button>
+        <a href="/" class="nav-brand">HeadyAI</a>
+      </div>
       <div class="nav-links">
         <a href="https://headyapi.com" class="nav-link">HeadyAPI</a>
-<a href="https://headyme.com" class="nav-link">HeadyMe</a>
-<a href="https://headysystems.com" class="nav-link">HeadySystems</a>
-
+        <a href="https://headyme.com" class="nav-link">HeadyMe</a>
+        <a href="https://headysystems.com" class="nav-link">HeadySystems</a>
       </div>
     </nav>
 
-    <section class="hero">
-      <div class="hero-badge">Heady™ Platform</div>
-      <h1 class="hero-title">
-        <span class="accent">Intelligence Routing Hub</span>
-      </h1>
-      <p class="hero-desc">HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.</p>
-      <div class="hero-cta">
-        
-      <a href="https://headyme.com" class="cta-btn">Get Started</a>
-        <a href="https://headysystems.com" class="cta-secondary">Learn More</a>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Documentation</div>
+      <ul class="sidebar-nav">
+        <li><a href="#overview">Platform Overview</a></li>
+        <li><a href="#quickstart">Quick Start</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#data-model">Data Model</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#api">API Reference</a></li>
+        <li><a href="#webhooks">Webhooks</a></li>
+        <li><a href="#sdks">SDKs &amp; Libraries</a></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
+        <li><a href="#support">Support</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <section class="hero">
+        <div class="hero-badge">Heady™ Platform</div>
+        <h1 class="hero-title">
+          <span class="accent">Intelligence Routing Hub</span>
+        </h1>
+        <p class="hero-desc">HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.</p>
+        <div class="hero-cta">
+          <a href="https://headyme.com" class="cta-btn">Get Started</a>
+          <a href="https://headysystems.com" class="cta-secondary">Learn More</a>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="features">
+          <div class="features-heading">
+            <h2>What We Offer</h2>
+            <p>Powered by Heady™ Liquid Latent OS</p>
+          </div>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🔀</div>
+              <div class="feature-title">Intelligent Routing</div>
+              <div class="feature-desc">φ-optimized routing across 8+ AI providers for lowest latency and best quality.</div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🧬</div>
+              <div class="feature-title">CSL Adaptive</div>
+              <div class="feature-desc">Crystallized State Logic adapts routing pressure based on real-time signals.</div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🌐</div>
+              <div class="feature-title">Multi-Provider</div>
+              <div class="feature-desc">GPT-4, Claude, Gemini, Groq, Perplexity — all unified under one API.</div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📈</div>
+              <div class="feature-title">Auto-Scaling</div>
+              <div class="feature-desc">Elastic capacity with Fibonacci-scheduled concurrency and self-healing nodes.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Documentation Sections -->
+        <div class="doc-sections">
+
+          <!-- 1. Overview -->
+          <section id="overview">
+            <div class="section-label">Overview</div>
+            <h2>Platform Overview</h2>
+            <p class="section-desc">HeadyAI serves as the central intelligence routing hub for the Heady™ platform, dynamically dispatching AI requests to the optimal provider using φ-scaled algorithms and adaptive pressure routing.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🧠</div>
+                <h3>Central Intelligence Hub</h3>
+                <p>Single entry point that unifies 8+ AI providers under one API, intelligently routing every request for optimal performance.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🌀</div>
+                <h3>φ-Scaled Algorithms</h3>
+                <p>Golden-ratio-based scaling algorithms that dynamically balance load, latency, and cost across all connected providers.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">⚡</div>
+                <h3>Adaptive Pressure Routing</h3>
+                <p>Real-time pressure signals from each provider inform routing decisions, ensuring requests always hit the fastest available endpoint.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Quick Start -->
+          <section id="quickstart">
+            <div class="section-label">Getting Started</div>
+            <h2>Quick Start</h2>
+            <p class="section-desc">Get up and running with HeadyAI in three simple steps. From API key to your first routed request in under five minutes.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🔑</div>
+                <h3>1. Get Your API Key</h3>
+                <p>Sign up at headyme.com to generate your HeadyAI API key. Keys are scoped per project with configurable rate limits.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🚀</div>
+                <h3>2. Make Your First Request</h3>
+                <p>Send a POST to /v1/route with your prompt and let HeadyAI select the optimal provider automatically based on context.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">📊</div>
+                <h3>3. View Routing Dashboard</h3>
+                <p>Monitor routing decisions, latency metrics, and provider health in real time from your HeadyAI dashboard.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Installation -->
+          <section id="installation">
+            <div class="section-label">Setup</div>
+            <h2>Installation</h2>
+            <p class="section-desc">Install HeadyAI via your preferred package manager or deploy as a containerized service. Supports npm, pip, Docker, and Cloudflare Workers.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">📦</div>
+                <h3>npm &amp; pip Packages</h3>
+                <p>Install with npm install @heady/ai or pip install heady-ai. Both packages include TypeScript types and full async support.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🐳</div>
+                <h3>Docker Setup</h3>
+                <p>Pull the official headyai/router image and run with your provider credentials mounted. Includes built-in health checks and metrics.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">☁️</div>
+                <h3>Cloudflare Worker Deployment</h3>
+                <p>Deploy HeadyAI at the edge with the Cloudflare Worker template. Sub-millisecond cold starts with global distribution.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Architecture -->
+          <section id="architecture">
+            <div class="section-label">System Design</div>
+            <h2>Architecture</h2>
+            <p class="section-desc">HeadyAI uses a multi-layer routing architecture designed for resilience, speed, and intelligent failover across all connected providers.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🌍</div>
+                <h3>Edge Layer</h3>
+                <p>Global edge nodes handle TLS termination, request validation, and geographic routing before forwarding to the gateway.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🚪</div>
+                <h3>Gateway &amp; Orchestration</h3>
+                <p>The gateway applies rate limiting and auth, then the orchestration layer scores providers using φ-pressure algorithms in real time.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🕸️</div>
+                <h3>Provider Mesh</h3>
+                <p>A self-healing mesh of AI provider connections with automatic failover, circuit breaking, and weighted load balancing.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5. Data Model -->
+          <section id="data-model">
+            <div class="section-label">Schema</div>
+            <h2>Data Model</h2>
+            <p class="section-desc">Understand the core data structures that power HeadyAI's routing engine — from request objects to session state tracking.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">📋</div>
+                <h3>Request Objects</h3>
+                <p>Typed request payloads containing prompt, model preferences, routing hints, and budget constraints for each API call.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🧭</div>
+                <h3>Routing Decisions</h3>
+                <p>Immutable decision records capturing provider selection rationale, scoring breakdown, and fallback chain for every routed request.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">💾</div>
+                <h3>Provider Responses &amp; Session State</h3>
+                <p>Normalized provider responses with token counts, latency data, and persistent session state for multi-turn conversations.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 6. Security -->
+          <section id="security">
+            <div class="section-label">Security</div>
+            <h2>Security</h2>
+            <p class="section-desc">HeadyAI implements defense-in-depth security with mutual TLS, zero-trust provider access, and comprehensive audit logging.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🔒</div>
+                <h3>mTLS &amp; API Key Rotation</h3>
+                <p>All provider connections use mutual TLS. API keys support automatic rotation with configurable expiry and revocation policies.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🛡️</div>
+                <h3>Zero-Trust Provider Access</h3>
+                <p>Every provider call is authenticated and authorized independently. No implicit trust — each request is verified against scoped permissions.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">📝</div>
+                <h3>Audit Logging</h3>
+                <p>Complete audit trail of all routing decisions, access events, and configuration changes with tamper-evident log integrity.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 7. API Reference -->
+          <section id="api">
+            <div class="section-label">API</div>
+            <h2>API Reference</h2>
+            <p class="section-desc">Full REST API documentation for HeadyAI's core endpoints. All endpoints accept JSON and return structured responses with routing metadata.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🔀</div>
+                <h3>/route &amp; /chat</h3>
+                <p>The /route endpoint auto-selects the best provider. The /chat endpoint provides a conversational interface with session continuity.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">✨</div>
+                <h3>/complete</h3>
+                <p>Single-shot completion endpoint with provider targeting, temperature control, and streaming support via Server-Sent Events.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">📡</div>
+                <h3>/models</h3>
+                <p>Lists all available models across connected providers with real-time availability, pricing, and capability metadata.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 8. Webhooks -->
+          <section id="webhooks">
+            <div class="section-label">Events</div>
+            <h2>Webhooks</h2>
+            <p class="section-desc">Subscribe to real-time events from HeadyAI's routing engine. Receive notifications for routing changes, failovers, budget alerts, and health status.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🔔</div>
+                <h3>Routing Events</h3>
+                <p>Get notified on routing decisions, provider switches, and latency threshold breaches with full decision context in the payload.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🔄</div>
+                <h3>Provider Failover Notifications</h3>
+                <p>Instant alerts when a provider fails over, including the reason, fallback provider selected, and estimated recovery time.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">💰</div>
+                <h3>Budget Alerts &amp; Health Checks</h3>
+                <p>Configurable budget threshold alerts and periodic health check summaries for all connected providers and routing nodes.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 9. SDKs & Libraries -->
+          <section id="sdks">
+            <div class="section-label">Libraries</div>
+            <h2>SDKs &amp; Libraries</h2>
+            <p class="section-desc">Official SDK support for major languages. Each SDK provides type-safe clients, automatic retries, and built-in streaming support.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🟨</div>
+                <h3>JavaScript / TypeScript</h3>
+                <p>Full-featured SDK with tree-shakeable modules, native fetch support, and first-class TypeScript types for all API surfaces.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🐍</div>
+                <h3>Python</h3>
+                <p>Async-first Python SDK with Pydantic models, streaming generators, and seamless integration with LangChain and LlamaIndex.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🦀</div>
+                <h3>Go &amp; Rust</h3>
+                <p>High-performance Go and Rust SDKs for latency-sensitive applications. Zero-copy deserialization and compile-time API validation.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 10. Ecosystem -->
+          <section id="ecosystem">
+            <div class="section-label">Network</div>
+            <h2>Ecosystem</h2>
+            <p class="section-desc">HeadyAI is part of the broader Heady™ platform. Connect with other Heady services for a complete AI infrastructure stack.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">🖥️</div>
+                <h3>HeadyOS &amp; HeadyAPI</h3>
+                <p>HeadyOS provides the Liquid Latent operating layer. HeadyAPI offers the unified gateway for all Heady platform services.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🤖</div>
+                <h3>HeadyBuddy &amp; HeadyMCP</h3>
+                <p>HeadyBuddy is the conversational AI assistant widget. HeadyMCP provides the Model Context Protocol layer for tool integration.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">👤</div>
+                <h3>HeadyMe</h3>
+                <p>Personal AI dashboard and identity layer. Manage your API keys, usage analytics, and provider preferences from one place.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 11. Support -->
+          <section id="support">
+            <div class="section-label">Help</div>
+            <h2>Support</h2>
+            <p class="section-desc">Get help from the HeadyAI community and team. We offer multiple support channels for developers of all levels.</p>
+            <div class="arch-grid">
+              <div class="arch-card">
+                <div class="arch-icon">💬</div>
+                <h3>Discord Community</h3>
+                <p>Join the Heady Discord for real-time help, feature discussions, and direct access to the engineering team.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🐛</div>
+                <h3>GitHub Issues &amp; Docs</h3>
+                <p>Report bugs and request features on GitHub. Browse the full documentation site for guides, tutorials, and API references.</p>
+              </div>
+              <div class="arch-card">
+                <div class="arch-icon">🏢</div>
+                <h3>Enterprise Support</h3>
+                <p>Dedicated support engineers, custom SLAs, priority routing, and private Slack channel for enterprise customers.</p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <section class="network">
+          <h3>Heady Network</h3>
+          <div class="network-links">
+            <a href="https://headyme.com" class="network-link">HeadyMe</a>
+            <a href="https://headysystems.com" class="network-link">HeadySystems</a>
+            <a href="https://headybuddy.org" class="network-link">HeadyBuddy</a>
+            <a href="https://headyapi.com" class="network-link">HeadyAPI</a>
+            <a href="https://headybot.com" class="network-link">HeadyBot</a>
+            <a href="https://headyai.com" class="network-link">HeadyAI</a>
+            <a href="https://discord.headysystems.com" class="network-link">Discord</a>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <div class="container">
-      <section class="features">
-        <div class="features-heading">
-          <h2>What We Offer</h2>
-          <p>Powered by Heady™ Liquid Latent OS</p>
-        </div>
-        <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🔀</div>
-          <div class="feature-title">Intelligent Routing</div>
-          <div class="feature-desc">φ-optimized routing across 8+ AI providers for lowest latency and best quality.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🧬</div>
-          <div class="feature-title">CSL Adaptive</div>
-          <div class="feature-desc">Crystallized State Logic adapts routing pressure based on real-time signals.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌐</div>
-          <div class="feature-title">Multi-Provider</div>
-          <div class="feature-desc">GPT-4, Claude, Gemini, Groq, Perplexity — all unified under one API.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <div class="feature-title">Auto-Scaling</div>
-          <div class="feature-desc">Elastic capacity with Fibonacci-scheduled concurrency and self-healing nodes.</div>
-        </div>
-        </div>
-      </section>
-
-      <section class="network">
-        <h3>Heady Network</h3>
-        <div class="network-links">
-          <a href="https://headyme.com" class="network-link">HeadyMe</a>
-          <a href="https://headysystems.com" class="network-link">HeadySystems</a>
-          <a href="https://headybuddy.org" class="network-link">HeadyBuddy</a>
-          <a href="https://headyapi.com" class="network-link">HeadyAPI</a>
-          <a href="https://headybot.com" class="network-link">HeadyBot</a>
-          <a href="https://headyai.com" class="network-link">HeadyAI</a>
-          <a href="https://discord.headysystems.com" class="network-link">Discord</a>
-        </div>
-      </section>
+      <footer>
+        <span class="footer-brand">HeadyAI</span>
+        <span class="footer-copy">
+          &copy; 2026 Heady Systems. All rights reserved. &nbsp;|&nbsp;
+          <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+        </span>
+      </footer>
     </div>
-
-    <footer>
-      <span class="footer-brand">HeadyAI</span>
-      <span class="footer-copy">
-        &copy; 2026 Heady Systems. All rights reserved. &nbsp;|&nbsp;
-        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
-      </span>
-    </footer>
   </div>
 
-  <script src="https://api.headysystems.com/buddy-widget.js"></script>
+  <!-- Sidebar active link highlighting -->
+  <script>
+    (function() {
+      var links = document.querySelectorAll('.sidebar-nav a');
+      var sections = [];
+      links.forEach(function(link) {
+        var id = link.getAttribute('href').replace('#', '');
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: link });
+      });
+      function onScroll() {
+        var scrollY = window.scrollY + 120;
+        var current = '';
+        sections.forEach(function(s) {
+          if (s.el.offsetTop <= scrollY) current = s.id;
+        });
+        links.forEach(function(link) { link.classList.remove('active'); });
+        if (current) {
+          var active = document.querySelector('.sidebar-nav a[href="#' + current + '"]');
+          if (active) active.classList.add('active');
+        }
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+
+      // Close sidebar on mobile when a link is clicked
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 900) {
+            document.querySelector('.sidebar').classList.remove('open');
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script src="https://headysystems.com/buddy-widget.js"></script>
 </body>
 </html>
