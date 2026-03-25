@@ -1,928 +1,494 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<!-- Perplexity Computer -->
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
 <meta name="generator" content="Perplexity Computer">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HeadyAI — Intelligence Routing Hub</title>
-  <meta name="description" content="HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.">
-  <meta name="theme-color" content="#A855F7">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23A855F7'/></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #A855F7;
-      --accent2: #7C3AED;
-      --bg: #0a0a0f;
-      --surface: rgba(255,255,255,0.04);
-      --surface-2: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.08);
-      --text: #e2e8f0;
-      --text-muted: rgba(226,232,240,0.6);
-      --sidebar-width: 260px;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', -apple-system, system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Animated Background ── */
-    .bg-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.15;
-      pointer-events: none;
-      z-index: 0;
-      animation: float 12s ease-in-out infinite;
-    }
-    .bg-orb-1 {
-      width: 600px; height: 600px;
-      background: var(--accent);
-      top: -200px; left: -200px;
-      animation-delay: 0s;
-    }
-    .bg-orb-2 {
-      width: 500px; height: 500px;
-      background: var(--accent2);
-      bottom: -150px; right: -150px;
-      animation-delay: -6s;
-    }
-    .bg-orb-3 {
-      width: 300px; height: 300px;
-      background: var(--accent);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: -3s;
-    }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.05); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
-    }
-
-    /* ── Layout ── */
-    .site-wrap {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* ── Nav ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10,10,15,0.7);
-    }
-    .nav-brand {
-      font-size: 20px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .nav-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .nav-link:hover {
-      color: var(--text);
-      background: var(--surface-2);
-    }
-
-    /* ── Sidebar ── */
-    .sidebar {
-      position: fixed;
-      top: 65px;
-      left: 0;
-      width: var(--sidebar-width);
-      height: calc(100vh - 65px);
-      background: rgba(10,10,15,0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-right: 1px solid var(--border);
-      overflow-y: auto;
-      z-index: 90;
-      padding: 24px 0;
-    }
-    .sidebar-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      padding: 0 24px;
-      margin-bottom: 12px;
-    }
-    .sidebar-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .sidebar-nav a {
-      display: block;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 8px 24px;
-      border-left: 3px solid transparent;
-      transition: all 0.2s;
-    }
-    .sidebar-nav a:hover,
-    .sidebar-nav a.active {
-      color: var(--text);
-      background: var(--surface);
-      border-left-color: var(--accent);
-    }
-    .sidebar::-webkit-scrollbar {
-      width: 4px;
-    }
-    .sidebar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .sidebar::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 4px;
-    }
-
-    /* ── Mobile sidebar toggle ── */
-    .sidebar-toggle {
-      display: none;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 20px;
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    .sidebar-toggle:hover {
-      background: var(--surface);
-      border-color: var(--accent);
-    }
-
-    /* ── Main Content Area ── */
-    .main-content {
-      margin-left: var(--sidebar-width);
-    }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 32px;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-    }
-    .hero-title {
-      font-size: clamp(40px, 7vw, 80px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 24px;
-      max-width: 900px;
-    }
-    .hero-title .accent {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-desc {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin-bottom: 48px;
-      line-height: 1.7;
-    }
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 700;
-      transition: all 0.3s;
-      box-shadow: 0 0 30px rgba(0,0,0,0.3);
-    }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-      opacity: 0.9;
-    }
-    .cta-secondary {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 14px 24px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: all 0.2s;
-    }
-    .cta-secondary:hover {
-      color: var(--text);
-      border-color: var(--accent);
-      background: var(--surface);
-    }
-
-    /* ── Glassmorphism Card ── */
-    .glass-card {
-      background: var(--surface);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-    }
-
-    /* ── Features ── */
-    .features {
-      padding: 80px 0;
-    }
-    .features-heading {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .features-heading h2 {
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .features-heading p {
-      color: var(--text-muted);
-      font-size: 16px;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: all 0.3s;
-    }
-    .feature-card:hover {
-      border-color: var(--accent);
-      background: var(--surface-2);
-      transform: translateY(-4px);
-    }
-    .feature-icon {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-    .feature-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .feature-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ── Documentation Sections ── */
-    .doc-sections {
-      padding: 40px 0 80px;
-    }
-    .doc-sections section {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-    }
-    .section-label {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      background: rgba(168,85,247,0.1);
-      border: 1px solid rgba(168,85,247,0.2);
-      border-radius: 100px;
-      padding: 4px 14px;
-      margin-bottom: 16px;
-    }
-    .doc-sections section h2 {
-      font-size: clamp(24px, 3.5vw, 36px);
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .section-desc {
-      font-size: 16px;
-      color: var(--text-muted);
-      max-width: 700px;
-      line-height: 1.7;
-      margin-bottom: 36px;
-    }
-    .arch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .arch-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: all 0.3s;
-    }
-    .arch-card:hover {
-      border-color: var(--accent);
-      background: var(--surface-2);
-      transform: translateY(-4px);
-    }
-    .arch-icon {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-    .arch-card h3 {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .arch-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ── Network ── */
-    .network {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-    }
-    .network h3 {
-      text-align: center;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-    }
-    .network-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-    .network-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 16px;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      transition: all 0.2s;
-    }
-    .network-link:hover {
-      color: var(--text);
-      border-color: var(--accent);
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-brand {
-      font-size: 14px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .footer-copy {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    .footer-copy a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    .footer-copy a:hover { color: var(--text); }
-
-    /* ── Mobile Responsive ── */
-    @media (max-width: 900px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-      .sidebar.open {
-        transform: translateX(0);
-      }
-      .sidebar-toggle {
-        display: flex;
-      }
-      .main-content {
-        margin-left: 0;
-      }
-    }
-    @media (max-width: 640px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
-      .hero { padding: 80px 20px 60px; }
-    }
-  </style>
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pioneering Continuous Semantic Logic, Vector Symbolic Architecture, and Sacred Geometry Topology. 51+ provisional patents by HeadySystems Inc.">
+<meta property="og:title" content="HeadyAI — The Science Behind HeadyOS">
+<meta property="og:description" content="Pioneering Continuous Semantic Logic, Vector Symbolic Architecture, and Sacred Geometry Topology. 51+ provisional patents by HeadySystems Inc.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heady-ai.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HeadyAI">
+<meta name="twitter:description" content="The Science Behind HeadyOS">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "HeadyAI",
+  "url": "https://heady-ai.com",
+  "description": "Pioneering Continuous Semantic Logic, Vector Symbolic Architecture, and Sacred Geometry Topology. 51+ provisional patents by HeadySystems Inc.",
+  "creator": {"@type": "SoftwareApplication", "name": "Perplexity Computer", "url": "https://www.perplexity.ai/computer"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Heady Systems",
+  "url": "https://headysystems.com",
+  "description": "AI-powered cognitive orchestration platform",
+  "founder": {"@type": "Person", "name": "Eric Haywood"},
+  "sameAs": ["https://github.com/HeadyAI"]
+}
+</script>
+<link rel="canonical" href="https://heady-ai.com/">
+<title>HeadyAI — The Science Behind HeadyOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared/css/heady-base.css">
+<style>
+  :root {
+    --color-accent: #8b5cf6;
+    --color-accent-dark: #7c3aed;
+    --color-accent-glow: rgba(139,92,246,0.15);
+    --color-accent-muted: rgba(139,92,246,0.08);
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139,92,246,0.15), transparent),
+      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(139,92,246,0.04), transparent);
+  }
+  .hero-grid { display:grid; gap:var(--space-8); align-items:start; }
+  .hero-grid-auth { grid-template-columns:minmax(0,1.2fr) minmax(320px,0.8fr); }
+  .hero-context-strip { margin-top:var(--space-6); padding:var(--space-4); border:1px solid var(--glass-border); border-radius:var(--radius-xl); background:var(--glass-bg); }
+  .prose-block p { max-width:none; margin-bottom:var(--space-5); }
+  .process-map { display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:center; margin-bottom:var(--space-8); padding:var(--space-5); border:1px solid var(--glass-border); border-radius:var(--radius-2xl); background:var(--glass-bg); }
+  .process-node { min-width:150px; padding:var(--space-4); border:1px solid var(--color-border); border-radius:var(--radius-xl); background:rgba(255,255,255,0.03); text-align:center; }
+  .process-node span { display:block; font-size:var(--text-xs); color:var(--color-text-faint); margin-bottom:var(--space-2); }
+  .process-arrow { color:var(--color-accent); font-size:var(--text-lg); }
+  .tech-diagram { display:grid; gap:var(--space-5); margin-bottom:var(--space-6); }
+  .stack-row { display:grid; gap:var(--space-3); padding:var(--space-4); border:1px solid var(--glass-border); border-radius:var(--radius-2xl); background:var(--glass-bg); }
+  .stack-label { font-size:var(--text-sm); text-transform:uppercase; letter-spacing:0.08em; color:var(--color-text-faint); max-width:none; }
+  .stack-row-grid { display:grid; gap:var(--space-3); grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+  .stack-node { padding:var(--space-3) var(--space-4); border-radius:var(--radius-lg); background:rgba(255,255,255,0.04); border:1px solid var(--color-border); font-size:var(--text-sm); }
+  .identity-console { padding:var(--space-6); border-radius:var(--radius-2xl); border:1px solid var(--glass-border); background:var(--glass-bg); backdrop-filter:blur(18px); box-shadow:var(--shadow-lg); }
+  .identity-console-title { font-size:var(--text-xl); margin-bottom:var(--space-3); }
+  .identity-console-copy { margin-bottom:var(--space-5); color:var(--color-text-muted); max-width:none; }
+  .identity-form { display:grid; gap:var(--space-4); }
+  .identity-form label { display:grid; gap:var(--space-2); }
+  .identity-form input { width:100%; padding:var(--space-3) var(--space-4); border-radius:var(--radius-lg); border:1px solid var(--color-border); background:rgba(255,255,255,0.04); color:var(--color-text); }
+  .identity-actions { display:flex; gap:var(--space-3); flex-wrap:wrap; }
+  .identity-note { font-size:var(--text-sm); color:var(--color-text-faint); max-width:none; }
+  @media (max-width: 900px) {
+    .hero-grid-auth { grid-template-columns:1fr; }
+  }
+</style>
 </head>
 <body>
-  <div class="bg-orb bg-orb-1"></div>
-  <div class="bg-orb bg-orb-2"></div>
-  <div class="bg-orb bg-orb-3"></div>
-
-  <div class="site-wrap">
-    <nav>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Toggle sidebar">&#9776;</button>
-        <a href="/" class="nav-brand">HeadyAI</a>
+<nav class="heady-nav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="HeadyAI home">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+      <circle cx="16" cy="16" r="8" stroke="var(--color-accent)" stroke-width="1.5"/>
+      <circle cx="16" cy="16" r="3" fill="var(--color-accent)"/>
+      <path d="M16 8 L16 2 M16 24 L16 30 M8 16 L2 16 M24 16 L30 16" stroke="var(--color-accent)" stroke-width="1" opacity="0.6"/>
+    </svg>
+    <span>Heady<span class="logo-accent">AI</span></span>
+  </a>
+  <ul class="nav-links" role="list"><li><a href="#research" class="">Research</a></li><li><a href="#patents" class="">Patents</a></li><li><a href="#nodes" class="">AI Nodes</a></li><li><a href="#blog" class="">Blog</a></li><li><a href="https://headysystems.com" class="cta">HeadySystems</a></li></ul>
+  <div class="nav-actions">
+    <button class="nav-theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle light or dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="nav-hamburger" aria-expanded="false" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<main id="main-content">
+  <section class="heady-hero" aria-label="Hero">
+  <canvas class="hero-canvas" data-sacred-geometry="sri-yantra" data-accent="#8b5cf6" aria-hidden="true"></canvas>
+  <div class="hero-content hero-grid">
+    <div>
+      <div class="hero-badge fade-in"><span class="hero-badge-dot" aria-hidden="true"></span>Research</div>
+      <h1 class="hero-title fade-in fade-in-delay-1">The Science Behind &lt;span class=&quot;accent&quot;&gt;HeadyOS&lt;/span&gt;</h1>
+      <p class="hero-subtitle fade-in fade-in-delay-2">Pioneering Continuous Semantic Logic, Vector Symbolic Architecture, and Sacred Geometry Topology — redefining the mathematics of intelligent systems.</p>
+      <div class="hero-actions fade-in fade-in-delay-3">
+        <a href="#features" class="btn btn-primary btn-lg">Explore the system</a>
+        <a href="#deep-dive" class="btn btn-ghost btn-lg">Read the full brief</a>
       </div>
-      <div class="nav-links">
-        <a href="https://headyapi.com" class="nav-link">HeadyAPI</a>
-        <a href="https://headyme.com" class="nav-link">HeadyMe</a>
-        <a href="https://headysystems.com" class="nav-link">HeadySystems</a>
+      <div class="hero-stats fade-in fade-in-delay-4"><div class="hero-stat">
+      <span class="hero-stat-value" data-count="51" data-prefix="" data-suffix="+">51+</span>
+      <span class="hero-stat-label">Provisional Patents</span>
+    </div><div class="hero-stat">
+      <span class="hero-stat-value" data-count="59" data-prefix="" data-suffix="">59</span>
+      <span class="hero-stat-label">Claims Filed</span>
+    </div><div class="hero-stat">
+      <span class="hero-stat-value" data-count="20" data-prefix="" data-suffix="">20</span>
+      <span class="hero-stat-label">AI Nodes</span>
+    </div><div class="hero-stat">
+      <span class="hero-stat-value" data-count="5" data-prefix="" data-suffix=",381">5,381</span>
+      <span class="hero-stat-label">Codebase Files</span>
+    </div></div>
+      <div class="hero-context-strip fade-in fade-in-delay-4" data-heady-bee="hero-context" data-heady-bee-content="<strong>AutoContext active.</strong> This page registers its domain, site role, and session hooks the moment the runtime loads.">
+        <strong>AutoContext active.</strong> This page registers its domain, site role, and session hooks the moment the runtime loads.
       </div>
-    </nav>
-
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <div class="sidebar-title">Documentation</div>
-      <ul class="sidebar-nav">
-        <li><a href="#overview">Platform Overview</a></li>
-        <li><a href="#quickstart">Quick Start</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#data-model">Data Model</a></li>
-        <li><a href="#security">Security</a></li>
-        <li><a href="#api">API Reference</a></li>
-        <li><a href="#webhooks">Webhooks</a></li>
-        <li><a href="#sdks">SDKs &amp; Libraries</a></li>
-        <li><a href="#ecosystem">Ecosystem</a></li>
-        <li><a href="#support">Support</a></li>
-      </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="main-content">
-      <section class="hero">
-        <div class="hero-badge">Heady™ Platform</div>
-        <h1 class="hero-title">
-          <span class="accent">Intelligence Routing Hub</span>
-        </h1>
-        <p class="hero-desc">HeadyAI is the central intelligence routing hub for the Heady™ platform — dynamically dispatching requests to the optimal AI provider using φ-scaled algorithms and adaptive pressure.</p>
-        <div class="hero-cta">
-          <a href="https://headyme.com" class="cta-btn">Get Started</a>
-          <a href="https://headysystems.com" class="cta-secondary">Learn More</a>
-        </div>
-      </section>
-
-      <div class="container">
-        <section class="features">
-          <div class="features-heading">
-            <h2>What We Offer</h2>
-            <p>Powered by Heady™ Liquid Latent OS</p>
-          </div>
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="feature-icon">🔀</div>
-              <div class="feature-title">Intelligent Routing</div>
-              <div class="feature-desc">φ-optimized routing across 8+ AI providers for lowest latency and best quality.</div>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🧬</div>
-              <div class="feature-title">CSL Adaptive</div>
-              <div class="feature-desc">Crystallized State Logic adapts routing pressure based on real-time signals.</div>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🌐</div>
-              <div class="feature-title">Multi-Provider</div>
-              <div class="feature-desc">GPT-4, Claude, Gemini, Groq, Perplexity — all unified under one API.</div>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">📈</div>
-              <div class="feature-title">Auto-Scaling</div>
-              <div class="feature-desc">Elastic capacity with Fibonacci-scheduled concurrency and self-healing nodes.</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Documentation Sections -->
-        <div class="doc-sections">
-
-          <!-- 1. Overview -->
-          <section id="overview">
-            <div class="section-label">Overview</div>
-            <h2>Platform Overview</h2>
-            <p class="section-desc">HeadyAI serves as the central intelligence routing hub for the Heady™ platform, dynamically dispatching AI requests to the optimal provider using φ-scaled algorithms and adaptive pressure routing.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🧠</div>
-                <h3>Central Intelligence Hub</h3>
-                <p>Single entry point that unifies 8+ AI providers under one API, intelligently routing every request for optimal performance.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🌀</div>
-                <h3>φ-Scaled Algorithms</h3>
-                <p>Golden-ratio-based scaling algorithms that dynamically balance load, latency, and cost across all connected providers.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">⚡</div>
-                <h3>Adaptive Pressure Routing</h3>
-                <p>Real-time pressure signals from each provider inform routing decisions, ensuring requests always hit the fastest available endpoint.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 2. Quick Start -->
-          <section id="quickstart">
-            <div class="section-label">Getting Started</div>
-            <h2>Quick Start</h2>
-            <p class="section-desc">Get up and running with HeadyAI in three simple steps. From API key to your first routed request in under five minutes.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🔑</div>
-                <h3>1. Get Your API Key</h3>
-                <p>Sign up at headyme.com to generate your HeadyAI API key. Keys are scoped per project with configurable rate limits.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🚀</div>
-                <h3>2. Make Your First Request</h3>
-                <p>Send a POST to /v1/route with your prompt and let HeadyAI select the optimal provider automatically based on context.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">📊</div>
-                <h3>3. View Routing Dashboard</h3>
-                <p>Monitor routing decisions, latency metrics, and provider health in real time from your HeadyAI dashboard.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 3. Installation -->
-          <section id="installation">
-            <div class="section-label">Setup</div>
-            <h2>Installation</h2>
-            <p class="section-desc">Install HeadyAI via your preferred package manager or deploy as a containerized service. Supports npm, pip, Docker, and Cloudflare Workers.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">📦</div>
-                <h3>npm &amp; pip Packages</h3>
-                <p>Install with npm install @heady/ai or pip install heady-ai. Both packages include TypeScript types and full async support.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🐳</div>
-                <h3>Docker Setup</h3>
-                <p>Pull the official headyai/router image and run with your provider credentials mounted. Includes built-in health checks and metrics.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">☁️</div>
-                <h3>Cloudflare Worker Deployment</h3>
-                <p>Deploy HeadyAI at the edge with the Cloudflare Worker template. Sub-millisecond cold starts with global distribution.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 4. Architecture -->
-          <section id="architecture">
-            <div class="section-label">System Design</div>
-            <h2>Architecture</h2>
-            <p class="section-desc">HeadyAI uses a multi-layer routing architecture designed for resilience, speed, and intelligent failover across all connected providers.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🌍</div>
-                <h3>Edge Layer</h3>
-                <p>Global edge nodes handle TLS termination, request validation, and geographic routing before forwarding to the gateway.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🚪</div>
-                <h3>Gateway &amp; Orchestration</h3>
-                <p>The gateway applies rate limiting and auth, then the orchestration layer scores providers using φ-pressure algorithms in real time.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🕸️</div>
-                <h3>Provider Mesh</h3>
-                <p>A self-healing mesh of AI provider connections with automatic failover, circuit breaking, and weighted load balancing.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 5. Data Model -->
-          <section id="data-model">
-            <div class="section-label">Schema</div>
-            <h2>Data Model</h2>
-            <p class="section-desc">Understand the core data structures that power HeadyAI's routing engine — from request objects to session state tracking.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">📋</div>
-                <h3>Request Objects</h3>
-                <p>Typed request payloads containing prompt, model preferences, routing hints, and budget constraints for each API call.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🧭</div>
-                <h3>Routing Decisions</h3>
-                <p>Immutable decision records capturing provider selection rationale, scoring breakdown, and fallback chain for every routed request.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">💾</div>
-                <h3>Provider Responses &amp; Session State</h3>
-                <p>Normalized provider responses with token counts, latency data, and persistent session state for multi-turn conversations.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 6. Security -->
-          <section id="security">
-            <div class="section-label">Security</div>
-            <h2>Security</h2>
-            <p class="section-desc">HeadyAI implements defense-in-depth security with mutual TLS, zero-trust provider access, and comprehensive audit logging.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🔒</div>
-                <h3>mTLS &amp; API Key Rotation</h3>
-                <p>All provider connections use mutual TLS. API keys support automatic rotation with configurable expiry and revocation policies.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🛡️</div>
-                <h3>Zero-Trust Provider Access</h3>
-                <p>Every provider call is authenticated and authorized independently. No implicit trust — each request is verified against scoped permissions.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">📝</div>
-                <h3>Audit Logging</h3>
-                <p>Complete audit trail of all routing decisions, access events, and configuration changes with tamper-evident log integrity.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 7. API Reference -->
-          <section id="api">
-            <div class="section-label">API</div>
-            <h2>API Reference</h2>
-            <p class="section-desc">Full REST API documentation for HeadyAI's core endpoints. All endpoints accept JSON and return structured responses with routing metadata.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🔀</div>
-                <h3>/route &amp; /chat</h3>
-                <p>The /route endpoint auto-selects the best provider. The /chat endpoint provides a conversational interface with session continuity.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">✨</div>
-                <h3>/complete</h3>
-                <p>Single-shot completion endpoint with provider targeting, temperature control, and streaming support via Server-Sent Events.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">📡</div>
-                <h3>/models</h3>
-                <p>Lists all available models across connected providers with real-time availability, pricing, and capability metadata.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 8. Webhooks -->
-          <section id="webhooks">
-            <div class="section-label">Events</div>
-            <h2>Webhooks</h2>
-            <p class="section-desc">Subscribe to real-time events from HeadyAI's routing engine. Receive notifications for routing changes, failovers, budget alerts, and health status.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🔔</div>
-                <h3>Routing Events</h3>
-                <p>Get notified on routing decisions, provider switches, and latency threshold breaches with full decision context in the payload.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🔄</div>
-                <h3>Provider Failover Notifications</h3>
-                <p>Instant alerts when a provider fails over, including the reason, fallback provider selected, and estimated recovery time.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">💰</div>
-                <h3>Budget Alerts &amp; Health Checks</h3>
-                <p>Configurable budget threshold alerts and periodic health check summaries for all connected providers and routing nodes.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 9. SDKs & Libraries -->
-          <section id="sdks">
-            <div class="section-label">Libraries</div>
-            <h2>SDKs &amp; Libraries</h2>
-            <p class="section-desc">Official SDK support for major languages. Each SDK provides type-safe clients, automatic retries, and built-in streaming support.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🟨</div>
-                <h3>JavaScript / TypeScript</h3>
-                <p>Full-featured SDK with tree-shakeable modules, native fetch support, and first-class TypeScript types for all API surfaces.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🐍</div>
-                <h3>Python</h3>
-                <p>Async-first Python SDK with Pydantic models, streaming generators, and seamless integration with LangChain and LlamaIndex.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🦀</div>
-                <h3>Go &amp; Rust</h3>
-                <p>High-performance Go and Rust SDKs for latency-sensitive applications. Zero-copy deserialization and compile-time API validation.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 10. Ecosystem -->
-          <section id="ecosystem">
-            <div class="section-label">Network</div>
-            <h2>Ecosystem</h2>
-            <p class="section-desc">HeadyAI is part of the broader Heady™ platform. Connect with other Heady services for a complete AI infrastructure stack.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">🖥️</div>
-                <h3>HeadyOS &amp; HeadyAPI</h3>
-                <p>HeadyOS provides the Liquid Latent operating layer. HeadyAPI offers the unified gateway for all Heady platform services.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🤖</div>
-                <h3>HeadyBuddy &amp; HeadyMCP</h3>
-                <p>HeadyBuddy is the conversational AI assistant widget. HeadyMCP provides the Model Context Protocol layer for tool integration.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">👤</div>
-                <h3>HeadyMe</h3>
-                <p>Personal AI dashboard and identity layer. Manage your API keys, usage analytics, and provider preferences from one place.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 11. Support -->
-          <section id="support">
-            <div class="section-label">Help</div>
-            <h2>Support</h2>
-            <p class="section-desc">Get help from the HeadyAI community and team. We offer multiple support channels for developers of all levels.</p>
-            <div class="arch-grid">
-              <div class="arch-card">
-                <div class="arch-icon">💬</div>
-                <h3>Discord Community</h3>
-                <p>Join the Heady Discord for real-time help, feature discussions, and direct access to the engineering team.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🐛</div>
-                <h3>GitHub Issues &amp; Docs</h3>
-                <p>Report bugs and request features on GitHub. Browse the full documentation site for guides, tutorials, and API references.</p>
-              </div>
-              <div class="arch-card">
-                <div class="arch-icon">🏢</div>
-                <h3>Enterprise Support</h3>
-                <p>Dedicated support engineers, custom SLAs, priority routing, and private Slack channel for enterprise customers.</p>
-              </div>
-            </div>
-          </section>
-
-        </div>
-
-        <section class="network">
-          <h3>Heady Network</h3>
-          <div class="network-links">
-            <a href="https://headyme.com" class="network-link">HeadyMe</a>
-            <a href="https://headysystems.com" class="network-link">HeadySystems</a>
-            <a href="https://headybuddy.org" class="network-link">HeadyBuddy</a>
-            <a href="https://headyapi.com" class="network-link">HeadyAPI</a>
-            <a href="https://headybot.com" class="network-link">HeadyBot</a>
-            <a href="https://headyai.com" class="network-link">HeadyAI</a>
-            <a href="https://discord.headysystems.com" class="network-link">Discord</a>
-          </div>
-        </section>
+    </div>
+    
+  </div>
+</section>
+  <section id="features" class="section" aria-labelledby="features-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Capabilities</p>
+      <h2 id="features-heading" class="section-title">What this site carries</h2>
+      <p class="section-subtitle">Every card below maps visible interface behavior to the system patterns running across the full Heady estate.</p>
+    </header>
+    <div class="grid-4 grid-auto"><div class="feature-card fade-in fade-in-delay-1">
+      <span class="feature-icon" aria-hidden="true">∿</span>
+      <h3 class="feature-title">Continuous Semantic Logic</h3>
+      <p class="feature-desc">Multi-valued gate operations with soft thresholds enabling probabilistic semantic reasoning. ƒ(x) ∈ [0,1] with φ-weighted activation.</p>
+    </div><div class="feature-card fade-in fade-in-delay-2">
+      <span class="feature-icon" aria-hidden="true">⊕</span>
+      <h3 class="feature-title">Vector Symbolic Architecture</h3>
+      <p class="feature-desc">Hyperdimensional computing with d ≥ 10,000 dimensions. Binding (⊗) and bundling (⊕) preserve semantic structure.</p>
+    </div><div class="feature-card fade-in fade-in-delay-3">
+      <span class="feature-icon" aria-hidden="true">φ</span>
+      <h3 class="feature-title">Sacred Geometry Topology</h3>
+      <p class="feature-desc">The golden ratio φ ≈ 1.618 and Fibonacci scaling encode natural optimization into system architecture.</p>
+    </div><div class="feature-card fade-in fade-in-delay-4">
+      <span class="feature-icon" aria-hidden="true">⬡</span>
+      <h3 class="feature-title">3D Spatial Memory</h3>
+      <p class="feature-desc">Agent memory as navigable 3D vector spaces with O(log n) octree retrieval and adaptive reorganization.</p>
+    </div></div>
+  </div>
+</section>
+  <section id="stats" class="section-sm" aria-labelledby="stats-heading">
+  <div class="container">
+    <header class="section-header fade-in" style="margin-bottom:var(--space-6)">
+      <p class="section-label" aria-hidden="true">Signals</p>
+      <h2 id="stats-heading" class="section-title">Animated system markers</h2>
+    </header>
+    <div class="stats-strip grid-4" role="region" aria-label="Key metrics"><div class="fade-in">
+      <div class="stat-value" data-count="51" data-prefix="" data-suffix="+">51+</div>
+      <div class="stat-label">Provisional Patents</div>
+    </div><div class="fade-in">
+      <div class="stat-value" data-count="59" data-prefix="" data-suffix="">59</div>
+      <div class="stat-label">Claims Filed</div>
+    </div><div class="fade-in">
+      <div class="stat-value" data-count="20" data-prefix="" data-suffix="">20</div>
+      <div class="stat-label">AI Nodes</div>
+    </div><div class="fade-in">
+      <div class="stat-value" data-count="5" data-prefix="" data-suffix=",381">5,381</div>
+      <div class="stat-label">Codebase Files</div>
+    </div></div>
+  </div>
+</section>
+  <section id="deep-dive" class="section" aria-labelledby="deep-dive-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Deep Dive</p>
+      <h2 id="deep-dive-heading" class="section-title">The full system brief</h2>
+      <p class="section-subtitle">Long-form explanation of how this property connects identity, context, delivery, and ecosystem navigation.</p>
+    </header>
+    <div class="deep-dive">
+      <article class="deep-dive-content prose-block" data-heady-bee="deep-dive"><p class="fade-in">HeadyAI exists for researchers, model builders, and partners exploring CSL, vector memory, and sacred geometry execution patterns. The page is not a decorative brochure. It is a system brief that explains how the science behind headyos becomes a working surface connected to the rest of Heady. Every visible section, every CTA, every navigation path, and every session-aware interaction is built around one idea: show the research logic that underpins the Heady ecosystem and explain how those ideas land in working systems. That is why the site pairs long-form explanation with a shared runtime, a sacred geometry canvas, and a central auth path. Visitors are not asked to imagine how the platform fits together. They can see the connection between the public story, the runtime layer, the auth layer, and the delivery layer in one place.</p><p class="fade-in">The design language leans on Sri Yantra because the Heady estate treats visual identity as a sign of system continuity. Each site gets its own canvas motion, yet the motion is not isolated ornament. It is paired with the same glass surfaces, the same phi-scaled spacing, the same navigation frame, and the same context bridge so that a person moving from HeadyAI to another Heady surface keeps orientation. That continuity matters for trust. A system that claims to orchestrate many domains should feel connected at the interaction level, at the code level, and at the message level. This page is written to make that contract plain rather than implied.</p><p class="fade-in">Identity is handled through auth.headysystems.com rather than ad hoc sign-in code scattered across many domains. When a visitor creates a session, the browser receives strict cookies set for the proper scope, redirect targets are checked against an allowlist, and relay messaging is limited to trusted origins. That architecture is important for HeadyAI because the page is part of a larger estate where people may enter through a community site, an investor site, an admin console, or a product site. Session continuity needs to survive those transitions without putting tokens in browser storage or asking every team to invent its own session pattern.</p><p class="fade-in">HeadyAutoContext is injected into the page because the site is treated as a participant in the ecosystem, not a static dead end. As soon as the runtime loads, the page declares its site metadata, domain identity, geometry selection, and session hooks. That context can then be carried into content injectors, auth updates, analytics events, and service calls. In practice this means that a visit to heady-ai.com can be understood alongside prior navigation, role-specific actions, and downstream service requests. The page becomes part of the operational memory of the platform rather than a disconnected HTML artifact.</p><p class="fade-in">The product story is built around four recurring platform pillars: continuous semantic logic that treats routing as geometric fit, vector memory that keeps meaning linked across long time spans, sacred geometry canvases that communicate system identity and topology, and research-to-runtime translation so ideas become deployable components. Those pillars are repeated across sections in different forms because they are the real connective tissue of the Heady estate. A hero statement gives the short promise. The features grid names the working pieces. The stats banner shows the scale frame. The deep-dive prose explains why the pieces belong together. The process section turns abstract ideas into action. The technology section names the supporting components. The ecosystem map places the page inside the broader estate. The use cases ground the story in lived workflows. The FAQ removes ambiguity for builders and operators who need more than slogans.</p><p class="fade-in">Operationally, HeadyAI is shaped to support semantic reasoning experiments and evaluation loops, vector memory indexing, retrieval, and interpretation, model council workflows that compare many reasoning paths, and research publishing, benchmark review, and architecture synthesis. That matters because the Heady platform is expected to do real work in real environments. A production page for this domain should help a visitor understand where their request will flow, how identity is preserved, how memory is linked, and how site actions connect to services behind the scenes. The prose intentionally uses concrete nouns such as cookies, relays, spans, webhooks, traces, vector memory, and service discovery because those details make the platform legible. The goal is not to sound futuristic. The goal is to sound implementable and consistent with the code that ships beside the page.</p><p class="fade-in">Observability is part of the story from the first render. Every request moving through the Heady system is meant to carry correlation identifiers, context enrichment, and typed error handling. That design choice shows up even on a public site like HeadyAI because the public page is a gateway into services, bees, swarms, and APIs that share the same operational contract. If a visitor signs in, opens a tool, starts an action, or navigates into another site, the system should be able to connect those steps into one coherent record. That is why the visual layer, auth layer, and service layer are discussed together instead of in isolation.</p><p class="fade-in">Content depth is deliberate here. A Heady site is required to explain itself with enough substance that a reader can understand the model without opening a separate document. That is why this page includes a long narrative, a process map, a technology interdependency frame, and FAQs with real answers rather than terse one-liners. The platform should not rely on mystery. It should rely on clarity. This approach also improves reuse because the same page can support onboarding, partner review, internal alignment, and public discovery without fragmenting the message into many disconnected notes.</p><p class="fade-in">The ecosystem map matters because HeadyAI is one node in a larger graph. A person may discover the company through HeadyFinance, join the community through HeadyConnection.com, work with nonprofit tools through HeadyConnection.org, operate services in Admin, or sign in through Auth. The links between those surfaces are not optional convenience features. They are proof that the estate is wired as one system. This page therefore makes the cross-site navigation explicit and keeps the footer tied to the same registry-driven structure used across the other properties so the visitor always has a clear route to adjacent capabilities.</p><p class="fade-in">From a deployment perspective, the page is built to live beside service packages, shared design assets, and the platform runtime. Shared CSS establishes the glass language, spacing, and typography. Shared JavaScript initializes sacred geometry, navigation, FAQ motion, counters, auth relay hooks, HeadyAutoContext, and the Bee injector. The site-specific content then rides on top of that shared layer. This separation lets the estate stay visually connected while still giving HeadyAI its own voice and motion signature. It also makes updates easier because system-wide behavior can be adjusted in one place without flattening the individuality of each site.</p><p class="fade-in">The final reason this page matters is narrative integrity. The Heady platform asks people to trust that many moving parts can act together without losing context. A page that explains its own place in the estate, names the operational signals it cares about, and links identity, context, delivery, and design into one frame helps earn that trust. For HeadyAI, the governing signals are semantic alignment, retrieval clarity, model synthesis, and research traceability. Those signals shape the writing, the interface choices, the process map, and the runtime hooks. In other words, the page is written to behave like the platform it describes: connected, explicit, and ready for real use.</p></article>
+      <div class="deep-dive-visual" aria-hidden="true">
+        <canvas style="width:100%;height:100%;position:absolute;inset:0;" data-sacred-geometry="sri-yantra" data-accent="#8b5cf6"></canvas>
       </div>
-
-      <footer>
-        <span class="footer-brand">HeadyAI</span>
-        <span class="footer-copy">
-          &copy; 2026 Heady Systems. All rights reserved. &nbsp;|&nbsp;
-          <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
-        </span>
-      </footer>
     </div>
   </div>
-
-  <!-- Sidebar active link highlighting -->
-  <script>
-    (function() {
-      var links = document.querySelectorAll('.sidebar-nav a');
-      var sections = [];
-      links.forEach(function(link) {
-        var id = link.getAttribute('href').replace('#', '');
-        var el = document.getElementById(id);
-        if (el) sections.push({ id: id, el: el, link: link });
+</section>
+  <section id="how-it-works" class="section" aria-labelledby="hiw-heading">
+  <div class="container container-narrow">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">How It Works</p>
+      <h2 id="hiw-heading" class="section-title">The path from page load to platform action</h2>
+      <p class="section-subtitle">Each step maps visible interface behavior to the runtime hooks, identity controls, and context handoffs behind it.</p>
+    </header>
+    <div class="process-map fade-in"><div class="process-node"><span>01</span><strong>Establish identity</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>02</span><strong>Enrich context</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>03</span><strong>Trigger content motion</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>04</span><strong>Connect platform services</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>05</span><strong>Carry the visitor onward</strong></div></div>
+    <div class="steps-list"><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">01</div>
+      <div>
+        <h3 class="step-title">Establish identity</h3>
+        <p class="step-desc">A visitor enters through HeadyAI and the page binds site metadata, theme state, and auth relay hooks before any deeper action begins. The result is a clean identity frame that can travel into the rest of the estate.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">02</div>
+      <div>
+        <h3 class="step-title">Enrich context</h3>
+        <p class="step-desc">HeadyAutoContext stores the domain, page role, sacred geometry selection, and session view so later actions inherit the same frame. This keeps pages, services, and agent interactions synchronized.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">03</div>
+      <div>
+        <h3 class="step-title">Trigger content motion</h3>
+        <p class="step-desc">Bee injectors and site modules can then adapt visible sections, CTAs, or helper panels using the same context object. That means dynamic behavior still remains tied to a shared system contract rather than page-local scripts.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">04</div>
+      <div>
+        <h3 class="step-title">Connect platform services</h3>
+        <p class="step-desc">When the page calls deeper services, request identifiers, domain markers, and trace hooks move with the action. This is where the website stops being brochureware and starts acting as a first-class platform surface.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">05</div>
+      <div>
+        <h3 class="step-title">Carry the visitor onward</h3>
+        <p class="step-desc">Cross-site navigation, registry-driven footers, and central auth allow the next step to happen without breaking orientation. The visitor can move to another Heady property and remain inside the same operational fabric.</p>
+      </div>
+    </div></div>
+  </div>
+</section>
+  <section id="tech-stack" class="section-sm" aria-labelledby="tech-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Technology Stack</p>
+      <h2 id="tech-heading" class="section-title">Visual interdependency diagram</h2>
+      <p class="section-subtitle">Shared assets, runtime modules, and trust controls are shown together because the Heady system is wired as one continuous surface.</p>
+    </header>
+    <div class="tech-diagram fade-in"><div class="stack-row"><p class="stack-label">Experience layer</p><div class="stack-row-grid"><div class="stack-node">Continuous Semantic Logic</div><div class="stack-node">Vector Symbolic Architecture</div><div class="stack-node">Sacred Geometry Topology</div><div class="stack-node">3D Spatial Memory</div></div></div><div class="stack-row"><p class="stack-label">Runtime layer</p><div class="stack-row-grid"><div class="stack-node">Firebase Auth</div><div class="stack-node">HeadyAutoContext</div><div class="stack-node">Bee Injector</div><div class="stack-node">OpenTelemetry</div></div></div><div class="stack-row"><p class="stack-label">Trust layer</p><div class="stack-row-grid"></div></div></div>
+    <div class="tech-stack fade-in" style="justify-content:center;"><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Continuous Semantic Logic</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Vector Symbolic Architecture</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Sacred Geometry Topology</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>3D Spatial Memory</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Firebase Auth</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>HeadyAutoContext</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Bee Injector</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>OpenTelemetry</span></div>
+  </div>
+</section>
+  <section id="ecosystem" class="section" aria-labelledby="eco-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Ecosystem Map</p>
+      <h2 id="eco-heading" class="section-title">How this site connects to every other Heady site</h2>
+      <p class="section-subtitle">The registry links below keep cross-site navigation explicit, visible, and always within reach.</p>
+    </header>
+    <div class="ecosystem-grid"><a href="https://headyme.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyMe</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadySystems</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyos.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyOS</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyconnection.org" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyConnection.org</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyconnection.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyConnection.com</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyex.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyEX</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadySystems</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://admin.headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">Admin</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://auth.headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">Auth</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a></div>
+  </div>
+</section>
+  <section id="use-cases" class="section" aria-labelledby="uc-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Use Cases</p>
+      <h2 id="uc-heading" class="section-title">Real scenarios for this property</h2>
+      <p class="section-subtitle">These scenarios show how the page supports discovery, trust, and movement into deeper action.</p>
+    </header>
+    <div class="use-case-grid"><div class="use-case-card fade-in">
+      <p class="use-case-label">Operator view</p>
+      <h3 class="use-case-title">Use HeadyAI as the front door into a connected workflow</h3>
+      <p class="use-case-desc">The page explains the system model, starts identity safely, and routes the visitor toward the right next surface without dropping context or forcing a reset.</p>
+    </div><div class="use-case-card fade-in">
+      <p class="use-case-label">Partner review</p>
+      <h3 class="use-case-title">Share HeadyAI with partners who need substance before they commit</h3>
+      <p class="use-case-desc">The long-form narrative, diagrams, and FAQ give a partner enough depth to understand how identity, memory, content, and services fit together.</p>
+    </div><div class="use-case-card fade-in">
+      <p class="use-case-label">Internal alignment</p>
+      <h3 class="use-case-title">Use HeadyAI as a canonical explanation layer</h3>
+      <p class="use-case-desc">Teams can rely on the same site to explain the public story, the operating model, and the technical connection points rather than maintaining fragmented summaries.</p>
+    </div><div class="use-case-card fade-in">
+      <p class="use-case-label">Cross-site movement</p>
+      <h3 class="use-case-title">Move from HeadyAI into another Heady property without losing state</h3>
+      <p class="use-case-desc">Central auth, registry-driven links, and request enrichment allow a reader to progress from discovery into action while the system keeps its context intact.</p>
+    </div></div>
+  </div>
+</section>
+  <section id="faq" class="section" aria-labelledby="faq-heading">
+  <div class="container container-narrow">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">FAQ</p>
+      <h2 id="faq-heading" class="section-title">Questions people ask before they trust a platform surface</h2>
+      <p class="section-subtitle">Rich answers help the page carry real explanatory weight instead of stopping at slogans.</p>
+    </header>
+    <div class="faq-list"><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What role does HeadyAI play in the Heady estate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>HeadyAI is not an isolated marketing page. It is a connected surface inside the wider Heady ecosystem. The page shares the same auth domain, context bridge, shared design system, and cross-site registry links used across the rest of the estate, which lets it participate in the same operational fabric as the deeper services.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Why is there so much long-form content on the page?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>Every Heady site is required to explain its model in enough detail that a reader can understand the system without opening a separate manual. That means the page carries narrative depth, process detail, architecture cues, and FAQ answers with enough substance to support onboarding, diligence, partner review, and internal alignment.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">How does central auth work here?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>Identity starts at auth.headysystems.com. Session material is stored in strict cookies, redirect targets are checked server-side, and state values keep flows bound to the initiating browser path. Other Heady sites receive session updates through an explicit relay pattern instead of storing bearer material in page scripts.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What does HeadyAutoContext do on a page like this?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>HeadyAutoContext turns the site into a context-aware participant in the platform. It records the page identity, domain role, session hints, and other metadata so content injectors, analytics, services, and adjacent sites can work from the same shared frame.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Why are sacred geometry canvases included on every site?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>The canvas motion gives each property a distinct identity while still signaling that the page belongs to the Heady estate. It is tied to the same shared runtime layer as the rest of the page, which means the visual system reinforces operational continuity rather than acting as decoration alone.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">How do content injectors fit into the experience?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>The HeadyBee injector lets pages receive context-shaped content blocks and updates while preserving a consistent DOM contract. This is useful for dynamic banners, helper copy, launch notes, and guided flows that need to respond to the current site and session frame.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What does this page emphasize about research translation?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>It emphasizes how HeadyAI contributes to the Heady system in working terms: how a visitor arrives, how identity is handled, how context is enriched, how services connect, and how the next step stays legible. The page is designed to turn a broad concept into an implementable operating picture.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Can this site evolve without breaking the rest of the estate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>Yes. Shared runtime behavior lives in common packages, while the page content and accents remain domain-specific. That means the estate can evolve centrally where it makes sense, while each property can still refine its own voice, diagrams, and use cases.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What makes this page production-ready rather than a mockup?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>The page includes real section structure, shared runtime hooks, central auth integration points, registry-driven navigation, animated counters, FAQ behavior, and explicit context wiring. It is built as a deployable static surface connected to the same shared assets and patterns used across the full Heady build.</p></div>
+    </div></div>
+  </div>
+</section>
+  <section id="cta" class="section" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-section">
+      <h2 class="cta-title">Continue into the Heady ecosystem</h2>
+      <p class="cta-subtitle">Use the shared sign-in flow, keep your context intact, and move from this page into the next Heady surface without losing orientation.</p>
+      <div class="cta-actions">
+        <a href="https://auth.headysystems.com?return=https://heady-ai.com" class="btn btn-primary btn-lg">Create or resume session</a>
+        <a href="#ecosystem" class="btn btn-ghost btn-lg">View connected sites</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="heady-footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" style="font-size:var(--text-lg);" aria-label="HeadyAI home">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+            <circle cx="16" cy="16" r="8" stroke="var(--color-accent)" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="3" fill="var(--color-accent)"/>
+          </svg>
+          Heady<span class="logo-accent">AI</span>
+        </a>
+        <p class="footer-tagline">Pioneering Continuous Semantic Logic, Vector Symbolic Architecture, and Sacred Geometry Topology. 51+ provisional patents by HeadySystems Inc.</p>
+        <div class="tech-stack" style="margin-top:var(--space-4);">
+          <span class="tech-badge"><span class="tech-badge-dot"></span>Auth-linked</span>
+          <span class="tech-badge"><span class="tech-badge-dot"></span>AutoContext-ready</span>
+          <span class="tech-badge"><span class="tech-badge-dot"></span>Bee-injectable</span>
+        </div>
+      </div>
+      <div class="footer-col"><p class="footer-col-title">Research</p><ul role="list"><li><a href="#research">CSL Papers</a></li><li><a href="#research">VSA Research</a></li><li><a href="#research">Sacred Geometry</a></li><li><a href="#research">Memory Systems</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Patents</p><ul role="list"><li><a href="#patents">Portfolio</a></li><li><a href="#patents">CSL Series</a></li><li><a href="#patents">Security</a></li><li><a href="#patents">Orchestration</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Company</p><ul role="list"><li><a href="https://headysystems.com">HeadySystems</a></li><li><a href="https://headyconnection.com">Community</a></li><li><a href="https://headyconnection.org">Non-Profit</a></li><li><a href="mailto:eric@headyconnection.org">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 HeadySystems Inc. · heady-ai.com · <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;opacity:0.7;">Created with Perplexity Computer</a></p>
+      <nav class="footer-cross-nav" aria-label="Cross-site navigation"><a href="https://headyme.com">HeadyMe</a><a href="https://headysystems.com">HeadySystems</a><a href="https://headyos.com">HeadyOS</a><a href="https://headyconnection.org">HeadyConnection.org</a><a href="https://headyconnection.com">HeadyConnection.com</a><a href="https://headyex.com">HeadyEX</a><a href="https://headysystems.com">HeadySystems</a><a href="https://admin.headysystems.com">Admin</a><a href="https://auth.headysystems.com">Auth</a></nav>
+    </div>
+  </div>
+</footer>
+<div class="auth-widget" id="heady-auth-widget" aria-live="polite">
+  <button class="auth-widget-btn" type="button" aria-label="Sign in to Heady">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="auth-label">Sign In</span>
+  </button>
+</div>
+<script>
+window.__HEADY_SITE_META__ = {
+  slug: "heady-ai",
+  domain: "heady-ai.com",
+  name: "HeadyAI",
+  accent: "#8b5cf6",
+  sacredGeometry: "Sri Yantra"
+};
+window.__HEADY_AUTH_CONFIG__ = {
+  cookieEndpoint: "https://auth.headysystems.com/api/session/start",
+  providerEndpoint: "https://auth.headysystems.com/api/provider/start",
+  relayOrigin: "https://auth.headysystems.com"
+};
+</script>
+<script defer src="/shared/js/heady-sacred-geometry.js"></script>
+<script defer src="/shared/js/heady-shared.js"></script>
+<script>
+if (window.HeadyAutoContext) window.HeadyAutoContext.init(window.__HEADY_SITE_META__);
+if (window.HeadyBeeInjector) window.HeadyBeeInjector.init({ site: "heady-ai.com" });
+const authForm = document.querySelector('[data-heady-auth-form]');
+if (authForm) {
+  authForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const payload = Object.fromEntries(new FormData(authForm).entries());
+    try {
+      const response = await fetch(window.__HEADY_AUTH_CONFIG__.cookieEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(payload)
       });
-      function onScroll() {
-        var scrollY = window.scrollY + 120;
-        var current = '';
-        sections.forEach(function(s) {
-          if (s.el.offsetTop <= scrollY) current = s.id;
-        });
-        links.forEach(function(link) { link.classList.remove('active'); });
-        if (current) {
-          var active = document.querySelector('.sidebar-nav a[href="#' + current + '"]');
-          if (active) active.classList.add('active');
-        }
-      }
-      window.addEventListener('scroll', onScroll);
-      onScroll();
+      if (response.ok) window.location.href = payload.returnUrl || 'https://headysystems.com';
+      else document.body.setAttribute('data-heady-auth-preview', 'retry-needed');
+    } catch (error) {
+      document.body.setAttribute('data-heady-auth-preview', 'offline-preview');
+    }
+  });
+  document.querySelectorAll('[data-heady-provider]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const provider = button.getAttribute('data-heady-provider');
+      const returnUrl = authForm.querySelector('input[name="returnUrl"]').value;
+      window.location.href = `${window.__HEADY_AUTH_CONFIG__.providerEndpoint}?provider=${encodeURIComponent(provider)}&return=${encodeURIComponent(returnUrl)}`;
+    });
+  });
+}
+</script>
+<div style="text-align: center; padding: 2rem;">
+  <a href="https://headyme.com/signup" style="display: inline-block; padding: 12px 32px; background: #00d4ff; color: #000; font-weight: 600; border-radius: 6px; text-decoration: none; font-size: 16px;">Get Started</a>
+</div>
+<section class="heady-ecosystem" style="padding: 2rem 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+  <p style="color: #aaa; font-size: 14px; margin-bottom: 1rem;">Part of the Heady Ecosystem</p>
+  <nav style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+    <a href="https://headysystems.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadySystems</a>
+    <a href="https://headyme.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyMe</a>
+    <a href="https://headyos.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyOS</a>
+    <a href="https://headyio.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyIO</a>
+    <a href="https://heady-ai.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">Heady AI</a>
+    <a href="https://headyconnection.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyConnection</a>
+  </nav>
+</section>
 
-      // Close sidebar on mobile when a link is clicked
-      links.forEach(function(link) {
-        link.addEventListener('click', function() {
-          if (window.innerWidth <= 900) {
-            document.querySelector('.sidebar').classList.remove('open');
-          }
-        });
-      });
-    })();
-  </script>
+<!-- HeadyBuddy Chat Widget -->
+<script>
+(function(){
+  var API="https://api.headysystems.com";
+  var s=document.createElement("div");s.id="heady-buddy-fab";
+  s.innerHTML='<div style="position:fixed;bottom:21px;right:21px;z-index:99999;"><button id="hb-toggle" style="width:55px;height:55px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#6366F1);border:none;cursor:pointer;box-shadow:0 4px 21px rgba(168,85,247,0.4);display:flex;align-items:center;justify-content:center;transition:transform 0.3s cubic-bezier(0.618,0,0.382,1);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button><div id="hb-panel" style="display:none;position:absolute;bottom:70px;right:0;width:360px;max-height:500px;background:#0f0f1a;border:1px solid rgba(168,85,247,0.3);border-radius:13px;box-shadow:0 8px 34px rgba(0,0,0,0.6);overflow:hidden;font-family:system-ui,-apple-system,sans-serif;"><div style="padding:13px 16px;background:linear-gradient(135deg,#A855F7,#6366F1);color:white;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;"><span style="font-size:18px;">&#x1F916;</span> HeadyBuddy<span style="margin-left:auto;font-size:11px;opacity:0.8;">AI Assistant</span></div><div id="hb-msgs" style="padding:13px;height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"><div style="background:rgba(168,85,247,0.15);color:#e2e8f0;padding:10px 13px;border-radius:13px 13px 13px 3px;font-size:13px;max-width:85%;">Hey! I'm HeadyBuddy. Ask me anything about the Heady ecosystem.</div></div><div style="padding:8px 13px 13px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;"><input id="hb-input" type="text" placeholder="Ask HeadyBuddy..." style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#f1f5f9;font-size:13px;outline:none;" /><button id="hb-send" style="background:linear-gradient(135deg,#A855F7,#6366F1);border:none;border-radius:8px;padding:8px 14px;color:white;cursor:pointer;font-size:13px;font-weight:500;">Send</button></div></div></div>';
+  document.body.appendChild(s);
+  var panel=document.getElementById("hb-panel"),msgs=document.getElementById("hb-msgs"),input=document.getElementById("hb-input");
+  document.getElementById("hb-toggle").onclick=function(){panel.style.display=panel.style.display==="none"?"block":"none";if(panel.style.display!=="none")input.focus();};
+  function addMsg(text,isUser){var d=document.createElement("div");d.style.cssText="padding:10px 13px;border-radius:13px;font-size:13px;max-width:85%;word-wrap:break-word;"+(isUser?"background:rgba(99,102,241,0.3);color:#e2e8f0;margin-left:auto;border-bottom-right-radius:3px;":"background:rgba(168,85,247,0.15);color:#e2e8f0;border-bottom-left-radius:3px;");d.textContent=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+  function send(){var q=input.value.trim();if(!q)return;addMsg(q,true);input.value="";addMsg("Thinking...",false);var last=msgs.lastChild;
+    fetch(API+"/api/buddy/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q,domain:location.hostname})}).then(function(r){return r.json();}).then(function(d){last.textContent=d.reply||d.response||d.text||"I can help with the Heady ecosystem. Try asking about products, API, or pricing.";}).catch(function(){last.textContent="Visit headybuddy.org for a full chat, or check docs at headyio.com.";});
+  }
+  document.getElementById("hb-send").onclick=send;
+  input.onkeydown=function(e){if(e.key==="Enter")send();};
+})();
+</script>
 
-  <script src="https://headysystems.com/buddy-widget.js"></script>
 </body>
 </html>
