@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeadyAI Docs — CSL Engine, Sacred Geometry & Foundation Docs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --phi: 1.618033988749895;
+      --psi: 0.618033988749895;
+      --sp-1: 5px; --sp-2: 8px; --sp-3: 13px; --sp-4: 21px;
+      --sp-5: 34px; --sp-6: 55px; --sp-7: 89px;
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-glass: rgba(255, 255, 255, 0.05);
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898a8;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent: #00d4aa;
+      --heady-gold: #d4a017;
+      --gold-dim: rgba(212, 160, 23, 0.12);
+      /* Layer 1 — Vesica Piscis: Purple */
+      --layer-color: #a855f7;
+      --layer-dim: rgba(168, 85, 247, 0.10);
+      --layer-glow: rgba(168, 85, 247, 0.25);
+      --sidebar-width: 260px;
+      --topnav-height: 55px;
+      --radius: 8px;
+      --radius-lg: 13px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.618; min-height: 100vh; }
+
+    .topnav { position: fixed; top: 0; left: 0; right: 0; height: var(--topnav-height); background: rgba(10,10,15,0.92); backdrop-filter: blur(21px); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; gap: var(--sp-5); padding: 0 var(--sp-5); z-index: 1000; }
+    .topnav-logo { display: flex; align-items: center; gap: var(--sp-2); font-weight: 600; font-size: 15px; color: var(--layer-color); text-decoration: none; flex-shrink: 0; }
+    .topnav-logo svg { width: 28px; height: 28px; }
+    .topnav-domains { display: flex; align-items: center; gap: var(--sp-1); flex: 1; overflow-x: auto; scrollbar-width: none; }
+    .topnav-domains::-webkit-scrollbar { display: none; }
+    .domain-link { font-size: 12px; color: var(--text-secondary); text-decoration: none; padding: var(--sp-1) var(--sp-2); border-radius: var(--radius); border: 1px solid transparent; white-space: nowrap; transition: all 0.2s ease; }
+    .domain-link:hover { color: var(--text-primary); border-color: var(--border-subtle); background: var(--bg-glass); }
+    .domain-link.active { color: var(--layer-color); border-color: var(--layer-dim); background: var(--layer-dim); }
+    .topnav-badge { flex-shrink: 0; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--layer-color); background: var(--layer-dim); border: 1px solid var(--layer-glow); padding: 2px var(--sp-2); border-radius: 4px; }
+
+    .layout { display: flex; padding-top: var(--topnav-height); min-height: 100vh; }
+
+    .sidebar { position: fixed; top: var(--topnav-height); left: 0; width: var(--sidebar-width); height: calc(100vh - var(--topnav-height)); background: var(--bg-secondary); border-right: 1px solid var(--border-subtle); overflow-y: auto; padding: var(--sp-5) 0; scrollbar-width: thin; scrollbar-color: var(--border-subtle) transparent; z-index: 100; }
+    .sidebar-section { margin-bottom: var(--sp-4); }
+    .sidebar-heading { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); padding: 0 var(--sp-4); margin-bottom: var(--sp-2); }
+    .sidebar-link { display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-4); font-size: 13px; color: var(--text-secondary); text-decoration: none; border-left: 2px solid transparent; transition: all 0.15s ease; }
+    .sidebar-link:hover { color: var(--text-primary); background: var(--bg-glass); border-left-color: var(--border-subtle); }
+    .sidebar-link.active { color: var(--layer-color); background: var(--layer-dim); border-left-color: var(--layer-color); }
+    .sidebar-link .link-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-secondary); opacity: 0.6; min-width: 24px; }
+
+    .main { margin-left: var(--sidebar-width); flex: 1; padding: var(--sp-7) var(--sp-6); max-width: 900px; }
+
+    .hero { display: flex; align-items: flex-start; gap: var(--sp-5); margin-bottom: var(--sp-6); padding-bottom: var(--sp-6); border-bottom: 1px solid var(--border-subtle); }
+    .hero-geo { flex-shrink: 0; width: 89px; height: 89px; opacity: 0.9; }
+    .hero-text h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); line-height: 1.3; margin-bottom: var(--sp-2); }
+    .hero-text h1 span { color: var(--layer-color); }
+    .hero-text p { color: var(--text-secondary); font-size: 15px; max-width: 560px; }
+    .hero-meta { display: flex; gap: var(--sp-3); margin-top: var(--sp-3); flex-wrap: wrap; }
+    .meta-pill { font-size: 11px; font-family: 'JetBrains Mono', monospace; padding: 3px var(--sp-2); border-radius: 4px; border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+    .meta-pill.accent { color: var(--layer-color); border-color: var(--layer-dim); background: var(--layer-dim); }
+    .meta-pill.gold { color: var(--heady-gold); border-color: var(--gold-dim); background: var(--gold-dim); }
+
+    .doc-section { margin-bottom: var(--sp-7); scroll-margin-top: calc(var(--topnav-height) + var(--sp-4)); }
+    .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--layer-color); font-family: 'JetBrains Mono', monospace; margin-bottom: var(--sp-2); }
+    .section-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-3); line-height: 1.3; }
+    .section-body { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: var(--sp-4); }
+    .section-body p { margin-bottom: var(--sp-3); }
+    .section-body strong { color: var(--text-primary); font-weight: 500; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-3); margin-top: var(--sp-4); }
+    .card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--sp-4); transition: border-color 0.2s, background 0.2s; }
+    .card:hover { border-color: var(--layer-color); background: var(--layer-dim); }
+    .card h3 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: var(--sp-1); }
+    .card p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    .code-block { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--sp-4); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a0a0b8; overflow-x: auto; margin: var(--sp-4) 0; line-height: 1.618; }
+    .code-block .hl { color: var(--layer-color); }
+    .code-block .hl-green { color: #4ade80; }
+    .code-block .hl-amber { color: var(--heady-gold); }
+    .code-block .hl-comment { color: #4a4a6a; }
+
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: var(--sp-4) 0; }
+    .data-table th { text-align: left; padding: var(--sp-2) var(--sp-3); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); }
+    .data-table td { padding: var(--sp-2) var(--sp-3); border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-secondary); vertical-align: top; }
+    .data-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--layer-color); }
+    .data-table tr:hover td { background: var(--bg-glass); }
+
+    .info-box { background: var(--layer-dim); border: 1px solid var(--layer-glow); border-left: 3px solid var(--layer-color); border-radius: var(--radius); padding: var(--sp-4); font-size: 13px; color: var(--text-secondary); margin: var(--sp-4) 0; }
+    .info-box strong { color: var(--layer-color); }
+    .phi-box { background: var(--gold-dim); border: 1px solid rgba(212,160,23,0.3); border-left: 3px solid var(--heady-gold); border-radius: var(--radius); padding: var(--sp-4); font-size: 13px; color: var(--text-secondary); margin: var(--sp-4) 0; }
+    .phi-box strong { color: var(--heady-gold); }
+
+    .badge { display: inline-flex; align-items: center; font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 2px 6px; border-radius: 3px; border: 1px solid; vertical-align: middle; }
+    .badge-purple { color: var(--layer-color); border-color: var(--layer-dim); background: var(--layer-dim); }
+    .badge-green { color: #4ade80; border-color: rgba(74,222,128,0.2); background: rgba(74,222,128,0.08); }
+
+    /* Sacred Geometry rings visualization */
+    .rings-diagram { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--sp-3); margin: var(--sp-4) 0; }
+    .ring-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--sp-4); position: relative; overflow: hidden; }
+    .ring-card::before { content: ''; position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--layer-glow); opacity: 0.3; }
+    .ring-card:hover { border-color: var(--layer-color); }
+    .ring-label { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--layer-color); margin-bottom: var(--sp-1); }
+    .ring-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: var(--sp-2); }
+    .ring-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* CSL gates visual */
+    .csl-gates { display: flex; flex-direction: column; gap: var(--sp-2); margin: var(--sp-4) 0; }
+    .csl-gate { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-2) var(--sp-3); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); }
+    .csl-gate:hover { border-color: var(--layer-dim); }
+    .csl-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--layer-color); min-width: 55px; }
+    .csl-bar-wrap { flex: 1; height: 4px; background: var(--border-subtle); border-radius: 2px; overflow: hidden; }
+    .csl-bar { height: 100%; background: linear-gradient(90deg, var(--layer-color), var(--accent)); border-radius: 2px; transition: width 0.3s; }
+    .csl-name { font-size: 12px; font-weight: 600; color: var(--text-primary); min-width: 80px; }
+    .csl-desc { font-size: 11px; color: var(--text-secondary); }
+
+    .archetype-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--sp-3); margin: var(--sp-4) 0; }
+    .archetype-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--sp-3); }
+    .archetype-card:hover { border-color: var(--layer-dim); }
+    .archetype-icon { font-size: 20px; margin-bottom: var(--sp-2); }
+    .archetype-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .archetype-layer { font-size: 10px; color: var(--layer-color); font-family: 'JetBrains Mono', monospace; }
+    .archetype-desc { font-size: 11px; color: var(--text-secondary); margin-top: var(--sp-1); line-height: 1.4; }
+
+    .divider { height: 1px; background: var(--border-subtle); margin: var(--sp-6) 0; }
+
+    .footer { margin-left: var(--sidebar-width); border-top: 1px solid var(--border-subtle); padding: var(--sp-5) var(--sp-6); background: var(--bg-secondary); }
+    .footer-inner { max-width: 900px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
+    .footer-copy { font-size: 12px; color: var(--text-secondary); }
+    .footer-links { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+    .footer-links a { font-size: 12px; color: var(--text-secondary); text-decoration: none; }
+    .footer-links a:hover { color: var(--layer-color); }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .main { margin-left: 0; padding: var(--sp-5) var(--sp-4); }
+      .footer { margin-left: 0; }
+      .topnav-domains { display: none; }
+      .hero { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="https://headyai.com" class="topnav-logo">
+    <!-- Vesica Piscis SVG -->
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="HeadyAI">
+      <circle cx="11" cy="14" r="8" stroke="#a855f7" stroke-width="1.2" fill="rgba(168,85,247,0.07)"/>
+      <circle cx="17" cy="14" r="8" stroke="#a855f7" stroke-width="1.2" fill="rgba(168,85,247,0.07)"/>
+      <path d="M14 6.5 Q20 10 20 14 Q20 18 14 21.5 Q8 18 8 14 Q8 10 14 6.5Z" stroke="#a855f7" stroke-width="0.6" fill="rgba(168,85,247,0.15)"/>
+      <circle cx="14" cy="14" r="2" fill="#a855f7" opacity="0.8"/>
+    </svg>
+    HeadyAI
+  </a>
+  <div class="topnav-domains">
+    <a href="https://headyme.com" class="domain-link">headyme.com</a>
+    <a href="https://headysystems.com" class="domain-link">headysystems.com</a>
+    <a href="https://headyconnection.org" class="domain-link">headyconnection.org</a>
+    <a href="https://headybuddy.org" class="domain-link">headybuddy.org</a>
+    <a href="https://headymcp.com" class="domain-link">headymcp.com</a>
+    <a href="https://headyio.com" class="domain-link">headyio.com</a>
+    <a href="https://headybot.com" class="domain-link">headybot.com</a>
+    <a href="https://headyai.com" class="domain-link active">headyai.com</a>
+    <a href="https://headyapi.com" class="domain-link">headyapi.com</a>
+  </div>
+  <span class="topnav-badge">Layer 1 · Vesica Piscis</span>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">HeadyAI Docs</div>
+      <a href="#overview" class="sidebar-link active"><span class="link-num">00</span> Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">01 Architecture</div>
+      <a href="#csl-engine" class="sidebar-link"><span class="link-num">01.1</span> CSL Engine</a>
+      <a href="#sacred-geometry" class="sidebar-link"><span class="link-num">01.2</span> Sacred Geometry</a>
+      <a href="#liquid-nodes" class="sidebar-link"><span class="link-num">01.3</span> Liquid Nodes OS</a>
+      <a href="#vsa" class="sidebar-link"><span class="link-num">01.4</span> Vector Symbolic Arch</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">02 Features</div>
+      <a href="#phi-math" class="sidebar-link"><span class="link-num">02.1</span> φ Math Foundation</a>
+      <a href="#imagination-engine" class="sidebar-link"><span class="link-num">02.2</span> Imagination Engine</a>
+      <a href="#multi-model" class="sidebar-link"><span class="link-num">02.3</span> Multi-Model Routing</a>
+      <a href="#384d-embeddings" class="sidebar-link"><span class="link-num">02.4</span> 384D Embeddings</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">03 Getting Started</div>
+      <a href="#foundation-docs" class="sidebar-link"><span class="link-num">03.1</span> Foundation Docs</a>
+      <a href="#animal-archetypes" class="sidebar-link"><span class="link-num">03.2</span> Animal Archetypes</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">04 Reference</div>
+      <a href="#csl-gates" class="sidebar-link"><span class="link-num">04.1</span> CSL Gate Values</a>
+      <a href="#phi-constants" class="sidebar-link"><span class="link-num">04.2</span> φ Constants Table</a>
+      <a href="#patents" class="sidebar-link"><span class="link-num">04.3</span> 60+ Provisional Patents</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero" id="overview">
+      <svg class="hero-geo" viewBox="0 0 89 89" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Vesica Piscis — two overlapping circles -->
+        <circle cx="36" cy="44.5" r="28" stroke="#a855f7" stroke-width="1.2" fill="rgba(168,85,247,0.05)"/>
+        <circle cx="53" cy="44.5" r="28" stroke="#a855f7" stroke-width="1.2" fill="rgba(168,85,247,0.05)"/>
+        <!-- Vesica region highlight -->
+        <path d="M44.5 16.5 Q62 25 62 44.5 Q62 64 44.5 72.5 Q27 64 27 44.5 Q27 25 44.5 16.5Z" stroke="#a855f7" stroke-width="0.8" fill="rgba(168,85,247,0.18)"/>
+        <circle cx="44.5" cy="44.5" r="5" fill="#a855f7" opacity="0.7"/>
+        <circle cx="44.5" cy="44.5" r="2" fill="#a855f7"/>
+        <!-- Inner dots at intersection points -->
+        <circle cx="44.5" cy="16.5" r="2" fill="#a855f7" opacity="0.4"/>
+        <circle cx="44.5" cy="72.5" r="2" fill="#a855f7" opacity="0.4"/>
+      </svg>
+      <div class="hero-text">
+        <h1>HeadyAI — <span>Cognitive Foundation</span></h1>
+        <p>The mathematical and philosophical core of the Heady ecosystem. HeadyAI houses the Continuous Semantic Logic engine, Sacred Geometry topology, Vector Symbolic Architecture, the Imagination Engine, Liquid Nodes OS, and the foundational φ-math constants governing all Heady systems.</p>
+        <div class="hero-meta">
+          <span class="meta-pill accent">Layer 1 — Vesica Piscis</span>
+          <span class="meta-pill gold">60+ Provisional Patents</span>
+          <span class="meta-pill">CSL Engine</span>
+          <span class="meta-pill">384D Embeddings</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 00 Overview -->
+    <section class="doc-section">
+      <div class="section-label">00 — Overview</div>
+      <div class="section-title">What is HeadyAI?</div>
+      <div class="section-body">
+        <p>HeadyAI is the <strong>cognitive foundation layer</strong> of the Heady ecosystem — the Vesica Piscis from which all other layers emerge. It defines the mathematical constants, logical operators, geometric topology, and embedding architecture that every other Heady service depends on.</p>
+        <p>At its center is the <strong>Continuous Semantic Logic (CSL)</strong> engine — a replacement for boolean True/False reasoning with continuous probability weights ranging from 0.0 to 1.0. CSL reflects the nuanced, gradient nature of real-world decision making, mirroring how human cognition processes uncertainty rather than forcing binary choices.</p>
+        <p>The Vesica Piscis geometry of Layer 1 is intentional: the Vesica Piscis is the intersection of two equal circles, representing the union of digital computation and organic intelligence. HeadyAI is where those two circles overlap — the space where mathematical precision and conscious-like reasoning merge.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>CSL Engine</h3>
+          <p>AND / OR / NOT / IMPLY / GATE operations on continuous probability weights. Replaces all boolean logic in the Heady pipeline with weighted semantic gates.</p>
+        </div>
+        <div class="card">
+          <h3>Sacred Geometry Topology</h3>
+          <p>Five concentric rings (Center, Inner, Middle, Outer, Governance) map to execution layers. All architectural boundaries derive from this geometry.</p>
+        </div>
+        <div class="card">
+          <h3>Liquid Nodes OS</h3>
+          <p>Services exist as fluid mathematical states. Nodes condense from Vector Memory when needed and evaporate back when idle — zero perpetual overhead.</p>
+        </div>
+        <div class="card">
+          <h3>VSA — 10,000D Vectors</h3>
+          <p>Vector Symbolic Architecture replaces conditional execution paths with hyperdimensional binding, bundling, and permutation operations.</p>
+        </div>
+        <div class="card">
+          <h3>384D Embeddings</h3>
+          <p>Sentence-transformer embeddings at 384 dimensions serve as the operational memory layer, indexed in Qdrant for cosine similarity retrieval.</p>
+        </div>
+        <div class="card">
+          <h3>60+ Provisional Patents</h3>
+          <p>HeadyAI's novel contributions to AI architecture are protected by a portfolio of provisional patents covering CSL, VSA, Liquid Nodes, and φ-governance.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 01.1 CSL Engine -->
+    <section class="doc-section" id="csl-engine">
+      <div class="section-label">01.1 — Architecture</div>
+      <div class="section-title">Continuous Semantic Logic (CSL) Engine</div>
+      <div class="section-body">
+        <p>The <strong>CSL engine</strong> is HeadyAI's core innovation — a complete replacement for boolean logic in AI orchestration. Traditional systems route decisions as True/False. CSL routes them as confidence weights between 0.0 and 1.0, enabling the system to express nuance, uncertainty, and graduated priority without losing determinism.</p>
+        <p>CSL implements five logical operations: <strong>AND</strong> (minimum of inputs), <strong>OR</strong> (maximum of inputs), <strong>NOT</strong> (1 − input), <strong>IMPLY</strong> (max(1−a, b)), and <strong>GATE</strong> (threshold comparison). These operations compose into arbitrarily complex reasoning graphs that route pipeline execution, swarm dispatch, and API responses.</p>
+      </div>
+      <div class="code-block">
+<span class="hl-comment">// CSL operations — TypeScript implementation</span>
+<span class="hl">export const</span> CSL = {
+  AND:   (a: <span class="hl">number</span>, b: <span class="hl">number</span>): <span class="hl">number</span> => Math.min(a, b),
+  OR:    (a: <span class="hl">number</span>, b: <span class="hl">number</span>): <span class="hl">number</span> => Math.max(a, b),
+  NOT:   (a: <span class="hl">number</span>): <span class="hl">number</span> => <span class="hl-amber">1</span> - a,
+  IMPLY: (a: <span class="hl">number</span>, b: <span class="hl">number</span>): <span class="hl">number</span> => Math.max(<span class="hl-amber">1</span> - a, b),
+  GATE:  (val: <span class="hl">number</span>, threshold: <span class="hl">number</span>): <span class="hl">boolean</span> => val >= threshold,
+};
+
+<span class="hl-comment">// Example: Route pipeline only if confidence is HIGH or better</span>
+<span class="hl">const</span> shouldExecute = CSL.GATE(
+  CSL.AND(intentScore, contextScore), <span class="hl-comment">// Combined confidence</span>
+  CSL_GATES.INJECT                    <span class="hl-comment">// Threshold: 0.718</span>
+);
+      </div>
+
+      <div class="csl-gates">
+        <div class="csl-gate">
+          <div class="csl-val">0.236</div>
+          <div class="csl-bar-wrap"><div class="csl-bar" style="width:23.6%"></div></div>
+          <div class="csl-name">SUPPRESS</div>
+          <div class="csl-desc">Entropy threshold — exclude from pipeline entirely</div>
+        </div>
+        <div class="csl-gate">
+          <div class="csl-val">0.382</div>
+          <div class="csl-bar-wrap"><div class="csl-bar" style="width:38.2%"></div></div>
+          <div class="csl-name">INCLUDE</div>
+          <div class="csl-desc">Minimum viable signal — preserve in context but deprioritize</div>
+        </div>
+        <div class="csl-gate">
+          <div class="csl-val">0.618</div>
+          <div class="csl-bar-wrap"><div class="csl-bar" style="width:61.8%"></div></div>
+          <div class="csl-name">BOOST</div>
+          <div class="csl-desc">Strong signal — target prioritized in routing decisions</div>
+        </div>
+        <div class="csl-gate">
+          <div class="csl-val">0.718</div>
+          <div class="csl-bar-wrap"><div class="csl-bar" style="width:71.8%"></div></div>
+          <div class="csl-name">INJECT</div>
+          <div class="csl-desc">Actionable high confidence — execute loop entry point</div>
+        </div>
+        <div class="csl-gate">
+          <div class="csl-val">0.882</div>
+          <div class="csl-bar-wrap"><div class="csl-bar" style="width:88.2%"></div></div>
+          <div class="csl-name">HIGH</div>
+          <div class="csl-desc">Execution lock — premium model tier activated</div>
+        </div>
+        <div class="csl-gate">
+          <div class="csl-val">0.927</div>
+          <div class="csl-bar-wrap"><div class="csl-bar" style="width:92.7%"></div></div>
+          <div class="csl-name">CRITICAL</div>
+          <div class="csl-desc">Maximum priority — payment and security event lock</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01.2 Sacred Geometry -->
+    <section class="doc-section" id="sacred-geometry">
+      <div class="section-label">01.2 — Architecture</div>
+      <div class="section-title">Sacred Geometry Topology</div>
+      <div class="section-body">
+        <p>The Heady architectural topology is organized as <strong>five concentric rings</strong>, each representing a distinct execution domain. This topology eliminates arbitrary service boundaries by anchoring the architecture to sacred geometric constants. Services are assigned to rings based on their distance from the cognitive core — inner rings handle intelligence, outer rings handle interfaces and governance.</p>
+        <p>Each ring corresponds to a geometric form: the innermost is the Point (singularity), expanding outward through the Vesica Piscis, Triangle, Square, and Pentagon. Every boundary crossing between rings requires a CSL confidence check with the appropriate gate threshold.</p>
+      </div>
+      <div class="rings-diagram">
+        <div class="ring-card">
+          <div class="ring-label">RING 0 — CENTER</div>
+          <div class="ring-name">Cognitive Core</div>
+          <div class="ring-desc">CSL Engine, φ constants, VSA operations. The source of all reasoning in the ecosystem.</div>
+        </div>
+        <div class="ring-card">
+          <div class="ring-label">RING 1 — INNER</div>
+          <div class="ring-name">Memory & Knowledge</div>
+          <div class="ring-desc">Qdrant vector store, Redis shadow memory, Elephant memory layer, knowledge graphs.</div>
+        </div>
+        <div class="ring-card">
+          <div class="ring-label">RING 2 — MIDDLE</div>
+          <div class="ring-name">Orchestration</div>
+          <div class="ring-desc">Heady Conductor, swarm management, HCFP pipeline, Brain and Researcher bees.</div>
+        </div>
+        <div class="ring-card">
+          <div class="ring-label">RING 3 — OUTER</div>
+          <div class="ring-name">Integration</div>
+          <div class="ring-desc">API Gateway, webhook ingestion, external connectors, Slack/Discord bridges.</div>
+        </div>
+        <div class="ring-card">
+          <div class="ring-label">RING 4 — GOVERNANCE</div>
+          <div class="ring-name">Security & Compliance</div>
+          <div class="ring-desc">heady-guard Zero-Trust Sandbox, JWT validation, SOC2 audit trail, RBAC enforcement.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01.3 Liquid Nodes -->
+    <section class="doc-section" id="liquid-nodes">
+      <div class="section-label">01.3 — Architecture</div>
+      <div class="section-title">Liquid Nodes OS</div>
+      <div class="section-body">
+        <p>Traditional microservices run perpetually, consuming compute overhead even when idle. HeadyAI's <strong>Liquid Nodes OS</strong> inverts this pattern: services exist in a <em>latent</em> state inside Vector Memory until inference pressure triggers them to instantiate — a process called <strong>condensation</strong>.</p>
+        <p>A Liquid Node lives at a 3D Vector Space coordinate. When an objective requires its capability, the <code>heady-conductor</code> queries the node registry, finds the latent node's coordinate, and condenses it into a running worker. Upon task completion, the node <strong>evaporates</strong> — writing its mutated state to Shadow Memory (Redis) and dissolving back to latency.</p>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>State</th><th>Description</th><th>Memory footprint</th><th>Transition trigger</th></tr></thead>
+        <tbody>
+          <tr><td>ACTIVE</td><td>Fully operational, processing HCFP pipeline</td><td>Full allocation</td><td>Task completion or timeout</td></tr>
+          <tr><td>DEGRADED</td><td>φ-timeout limits hit; drops secondary logging</td><td>Reduced — core only</td><td>Performance recovery or shutdown</td></tr>
+          <tr><td>STANDBY</td><td>Alive but idle, awaiting connection pool assignment</td><td>Minimal heartbeat</td><td>New task assignment</td></tr>
+          <tr><td>LATENT</td><td>Dissolved to vector coordinate — zero runtime cost</td><td>None (VSA codebook)</td><td>Conductor condensation request</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">
+        <strong>Heartbeat Interval:</strong> Active Liquid Nodes broadcast a heartbeat at <code>TIMING.LONG</code> — φ⁸ × 1000 ≈ 46,979 ms. If a dependent node goes unhealthy, the Liquid State Manager rewires the request pipeline to an alternative VSA codebook permutation, guaranteeing zero-downtime execution.
+      </div>
+    </section>
+
+    <!-- 01.4 VSA -->
+    <section class="doc-section" id="vsa">
+      <div class="section-label">01.4 — Architecture</div>
+      <div class="section-title">Vector Symbolic Architecture (VSA)</div>
+      <div class="section-body">
+        <p><strong>Vector Symbolic Architecture</strong> is the memory and reasoning paradigm that replaces conditional <code>if/else</code> execution paths with hyperdimensional vector operations. In VSA, concepts are represented as high-dimensional binary or bipolar vectors (10,000+ dimensions). Operations on these vectors encode relationships and enable robust similarity search even under noise.</p>
+        <p>HeadyAI implements three core VSA operations: <strong>Binding (⊗)</strong> associates two concepts; <strong>Bundling (+)</strong> merges multiple concepts into a superposition; and <strong>Permutation (π)</strong> encodes sequence and positional information. Near-orthogonal random vectors guarantee that unrelated concepts remain separable in the high-dimensional space.</p>
+      </div>
+      <div class="code-block">
+<span class="hl-comment">// VSA operations — hyperdimensional computing</span>
+<span class="hl">const</span> DIM = <span class="hl-amber">10000</span>;  <span class="hl-comment">// 10,000-dimensional vector space</span>
+
+<span class="hl-comment">// Binding: encode a key-value relationship</span>
+<span class="hl">function</span> bind(a: Float32Array, b: Float32Array): Float32Array {
+  <span class="hl">return</span> a.map((v, i) => v * b[i]);  <span class="hl-comment">// element-wise product</span>
+}
+
+<span class="hl-comment">// Bundling: merge multiple concepts (superposition)</span>
+<span class="hl">function</span> bundle(...vectors: Float32Array[]): Float32Array {
+  <span class="hl">return</span> new Float32Array(DIM).map((_, i) =>
+    Math.sign(vectors.reduce((sum, v) => sum + v[i], <span class="hl-amber">0</span>))
+  );
+}
+
+<span class="hl-comment">// Permutation: encode positional sequence</span>
+<span class="hl">function</span> permute(v: Float32Array, steps = <span class="hl-amber">1</span>): Float32Array {
+  <span class="hl">return</span> new Float32Array([...v.slice(steps), ...v.slice(<span class="hl-amber">0</span>, steps)]);
+}
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 02.1 Phi Math -->
+    <section class="doc-section" id="phi-math">
+      <div class="section-label">02.1 — Features</div>
+      <div class="section-title">φ Math Foundation</div>
+      <div class="section-body">
+        <p>The Golden Ratio φ = 1.618033988749895 and the Fibonacci sequence are the <strong>sole source</strong> of numerical constants across the entire Heady ecosystem. No magic numbers. No arbitrary timeouts or limits. Every boundary, interval, and allocation derives from this single mathematical foundation.</p>
+        <p>This is not aesthetic — it is structural. By anchoring all system parameters to φ, Heady achieves <strong>natural harmonic scaling</strong>: when one subsystem scales, all related parameters scale proportionally without requiring manual tuning. The system self-balances as load increases, because every limit is a ratio of the same base constant.</p>
+      </div>
+      <div class="phi-box">
+        <strong>The Universal Constants from phi.js:</strong><br/>
+        φ (Phi) = 1.618033988749895 · ψ (Psi) = 1/φ = 0.618033988749895 · ψ² = 0.382 · φ² = 2.618 · √φ = 1.272
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Expression</th><th>Value</th><th>System Role</th></tr></thead>
+        <tbody>
+          <tr><td>φ</td><td>1.618033…</td><td>Coverage tiers, performance budgets, retry multiplier</td></tr>
+          <tr><td>1/φ = ψ</td><td>0.618033…</td><td>CSL BOOST gate, Tier 4 coverage target</td></tr>
+          <tr><td>ψ² = 1−φ⁻²</td><td>0.381966…</td><td>CSL INCLUDE gate (≈0.382)</td></tr>
+          <tr><td>φ³ × 1000</td><td>4,236 ms</td><td>TIMING.FAST — MCP reads, cognitive checks</td></tr>
+          <tr><td>φ⁵ × 1000</td><td>11,090 ms</td><td>TIMING.NORMAL — standard inference timeout</td></tr>
+          <tr><td>φ⁸ × 1000</td><td>46,979 ms</td><td>TIMING.LONG — deep LLM scaffolding, heartbeats</td></tr>
+          <tr><td>fib(10) = 55</td><td>55 days</td><td>JWT lifetime — natural token expiry</td></tr>
+          <tr><td>fib(16) = 987</td><td>987</td><td>Maximum cache entries</td></tr>
+          <tr><td>fib(11) = 89</td><td>89</td><td>Total bee type count</td></tr>
+          <tr><td>fib(12) = 144</td><td>144</td><td>Global mesh rate limit (reqs/sec)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 02.2 Imagination Engine -->
+    <section class="doc-section" id="imagination-engine">
+      <div class="section-label">02.2 — Features</div>
+      <div class="section-title">Imagination Engine</div>
+      <div class="section-body">
+        <p>The <strong>Imagination Engine</strong> is HeadyAI's generative reasoning module — the system's capacity to synthesize novel solutions from learned patterns without direct training examples. It sits at the intersection of VSA memory and the CSL reasoning layer.</p>
+        <p>When the HCFP pipeline encounters a task outside its trained distribution, the Imagination Engine activates: it retrieves the nearest VSA codebook entries, performs binding and bundling operations to create a novel concept vector, and proposes a solution path with an associated CSL confidence score. The Brain bee then evaluates the proposal before committing to execution.</p>
+        <p>This architecture enables <strong>zero-shot generalization</strong> — the system can reason about genuinely new scenarios without retraining, because it operates on the relationships between concepts (VSA vectors) rather than surface-level pattern matching.</p>
+      </div>
+      <div class="info-box">
+        <strong>Imagination Engine Activation:</strong> Triggered when a task produces a CSL confidence score below INCLUDE (0.382) after normal pipeline processing. The engine runs as a MUSE_SWARM bee with Premium model tier and full VSA tool access.
+      </div>
+    </section>
+
+    <!-- 02.3 Multi-Model Routing -->
+    <section class="doc-section" id="multi-model">
+      <div class="section-label">02.3 — Features</div>
+      <div class="section-title">Multi-Model Routing</div>
+      <div class="section-body">
+        <p>HeadyAI's inference layer routes requests across multiple LLM providers using a <strong>CSL-weighted fallback chain</strong>. The primary model is selected based on task complexity (measured by the pipeline variant) and current provider availability. If a model returns a CSL confidence below BOOST (0.618), the engine automatically routes to the next provider in the fallback sequence.</p>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Provider</th><th>Tier</th><th>Use Case</th><th>Fallback Position</th></tr></thead>
+        <tbody>
+          <tr><td>Groq (Llama/Mistral)</td><td>Fast</td><td>FAST pipeline (8 stages) — chat responses, quick classification</td><td>Primary for FAST</td></tr>
+          <tr><td>Gemini 1.5 Flash</td><td>Standard</td><td>STANDARD pipeline (13 stages) — everyday generative tasks</td><td>Primary for STANDARD</td></tr>
+          <tr><td>Claude 3.5 Sonnet</td><td>Premium</td><td>ARENA / FULL pipeline — code generation, deep analysis</td><td>Primary for FULL</td></tr>
+          <tr><td>OpenAI GPT-4o</td><td>Premium</td><td>Fallback for Claude; ARENA battle mode competitor</td><td>Fallback #1 for FULL</td></tr>
+          <tr><td>Gemini 1.5 Pro</td><td>Premium</td><td>Long-context tasks (>128k tokens), document analysis</td><td>Fallback #2 for FULL</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 02.4 Embeddings -->
+    <section class="doc-section" id="384d-embeddings">
+      <div class="section-label">02.4 — Features</div>
+      <div class="section-title">384-Dimensional Embeddings</div>
+      <div class="section-body">
+        <p>HeadyAI uses <strong>384-dimensional sentence-transformer embeddings</strong> as its operational memory layer. The 384D space is indexed in Qdrant (hosted on GCP) for cosine similarity retrieval. This dimension count is not arbitrary — 384 = 3 × 128, and 128 = 2⁷ = fib-adjacent, maintaining harmonic alignment with the φ-math foundation.</p>
+        <p>All agent context, conversation history, and learned patterns are embedded and stored as 384D vectors. The MEMORY_SWARM memory-bee handles write operations; read operations use Qdrant's HNSW index with ef_search = fib(8) = 21 for balanced recall and latency.</p>
+      </div>
+      <div class="code-block">
+<span class="hl-comment">// Qdrant collection configuration</span>
+{
+  <span class="hl-green">"collection_name"</span>: <span class="hl-green">"heady-memory"</span>,
+  <span class="hl-green">"vectors"</span>: {
+    <span class="hl-green">"size"</span>: <span class="hl-amber">384</span>,              <span class="hl-comment">// 384D — sentence-transformers/all-MiniLM-L6-v2</span>
+    <span class="hl-green">"distance"</span>: <span class="hl-green">"Cosine"</span>
+  },
+  <span class="hl-green">"hnsw_config"</span>: {
+    <span class="hl-green">"m"</span>: <span class="hl-amber">21</span>,               <span class="hl-comment">// fib(8) — HNSW bidirectional links</span>
+    <span class="hl-green">"ef_construct"</span>: <span class="hl-amber">89</span>,   <span class="hl-comment">// fib(11) — construction quality</span>
+    <span class="hl-green">"ef"</span>: <span class="hl-amber">21</span>               <span class="hl-comment">// fib(8) — search ef value</span>
+  }
+}
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 03.1 Foundation Docs -->
+    <section class="doc-section" id="foundation-docs">
+      <div class="section-label">03.1 — Getting Started</div>
+      <div class="section-title">Foundation Docs Index</div>
+      <div class="section-body">
+        <p>The HeadyAI foundation documents are the source of truth for all theoretical underpinnings of the ecosystem. They live in <code>Heady-Main/01-foundations/</code> and are referenced by every service team when making architectural decisions.</p>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Document</th><th>File</th><th>Content</th></tr></thead>
+        <tbody>
+          <tr><td>CSL Theory</td><td>csl-theory.md</td><td>Self-awareness loops, φ as governing constant, non-optimization assumption</td></tr>
+          <tr><td>PHI Math Constants</td><td>phi-math-constants.md</td><td>Complete φ constant table with usage mappings</td></tr>
+          <tr><td>VSA Foundations</td><td>vsa-foundations.md</td><td>Binding, bundling, permutation operations; near-orthogonal vector properties</td></tr>
+          <tr><td>DuckDB VSS Semantics</td><td>duckdb-vss-semantics.md</td><td>Vector similarity search with DuckDB for analytical workloads</td></tr>
+          <tr><td>Sentence Transformers</td><td>sentence-transformers-models.md</td><td>Embedding model selection guide — 384D vs 768D tradeoffs</td></tr>
+          <tr><td>TorchHD Operations</td><td>torchhd-operations-guide.md</td><td>Hyperdimensional computing ops for high-throughput VSA</td></tr>
+          <tr><td>Sacred Geometry Scaling v4</td><td>sacred_geometry.md</td><td>φ scaling constants, Fibonacci concurrency map, timeout tiers</td></tr>
+          <tr><td>Omnipotence Directive v4</td><td>omnipotence-directive-v4.md</td><td>Infinite Recursive Ascension Loop — self-optimization protocol</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 03.2 Animal Archetypes -->
+    <section class="doc-section" id="animal-archetypes">
+      <div class="section-label">03.2 — Getting Started</div>
+      <div class="section-title">Animal Archetype Execution Layers</div>
+      <div class="section-body">
+        <p>The Heady system organizes execution into biologically-inspired layers, each mapped to an animal archetype. These archetypes provide an intuitive mental model for how different parts of the system interact — reinforcing HeadyAI's philosophy that software should mirror organic intelligence.</p>
+      </div>
+      <div class="archetype-grid">
+        <div class="archetype-card">
+          <div class="archetype-icon">🐜</div>
+          <div class="archetype-name">Ant</div>
+          <div class="archetype-layer">ANT_TASK_LAYER</div>
+          <div class="archetype-desc">Work decomposition, parallel task execution, colony swarm coordination.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🦫</div>
+          <div class="archetype-name">Beaver</div>
+          <div class="archetype-layer">BEAVER_BUILD_LAYER</div>
+          <div class="archetype-desc">Construction, CI/CD pipeline, artifact generation, infrastructure builds.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🐬</div>
+          <div class="archetype-name">Dolphin</div>
+          <div class="archetype-layer">DOLPHIN_CREATIVITY_LAYER</div>
+          <div class="archetype-desc">Innovation, creative problem solving, play — activates Imagination Engine.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🦅</div>
+          <div class="archetype-name">Eagle</div>
+          <div class="archetype-layer">EAGLE_OMNISCIENCE_LAYER</div>
+          <div class="archetype-desc">System-wide visibility, monitoring, oversight — provides context to all layers.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🐘</div>
+          <div class="archetype-name">Elephant</div>
+          <div class="archetype-layer">ELEPHANT_MEMORY_LAYER</div>
+          <div class="archetype-desc">Long-term recall, knowledge persistence, VSA codebook management.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🦉</div>
+          <div class="archetype-name">Owl</div>
+          <div class="archetype-layer">OWL_WISDOM_LAYER</div>
+          <div class="archetype-desc">Decision-making, judgment, pattern recognition — routes via Elephant memory.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🐇</div>
+          <div class="archetype-name">Rabbit</div>
+          <div class="archetype-layer">RABBIT_MULTIPLICATION_LAYER</div>
+          <div class="archetype-desc">Scaling, replication, spawning parallel workers — Fibonacci growth patterns.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 04.1 CSL Gates -->
+    <section class="doc-section" id="csl-gates">
+      <div class="section-label">04.1 — Reference</div>
+      <div class="section-title">CSL Gate Reference</div>
+      <div class="section-body">
+        <p>All CSL gate values are mathematically derived from φ and its reciprocal ψ. Boolean True/False is replaced by these threshold anchors — every routing path, circuit breaker trigger, and swarm dispatch occurs within these symmetrical mathematical constraints.</p>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Gate</th><th>Value</th><th>Derivation</th><th>System Behavior</th></tr></thead>
+        <tbody>
+          <tr><td>SUPPRESS</td><td>0.236</td><td>1 − ψ / φ² ≈ 0.236</td><td>Exclude from pipeline; entropy too high to process</td></tr>
+          <tr><td>INCLUDE</td><td>0.382</td><td>ψ² = (1/φ)² ≈ 0.382</td><td>Preserve in context; minimum viable signal</td></tr>
+          <tr><td>BOOST</td><td>0.618</td><td>ψ = 1/φ = 0.618</td><td>Strong signal; target prioritized in routing</td></tr>
+          <tr><td>INJECT</td><td>0.718</td><td>≈ (φ+ψ)/φ² ≈ 0.718</td><td>Actionable confidence; loop entry committed</td></tr>
+          <tr><td>HIGH</td><td>0.882</td><td>≈ 1 − 1/φ³ ≈ 0.882</td><td>Execution lock; Premium model tier required</td></tr>
+          <tr><td>CRITICAL</td><td>0.927</td><td>≈ φ/φ+ψ² ≈ 0.927</td><td>Maximum priority lock; payment/security events</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 04.2 Phi Constants -->
+    <section class="doc-section" id="phi-constants">
+      <div class="section-label">04.2 — Reference</div>
+      <div class="section-title">Complete φ Constants Table</div>
+      <div class="section-body">
+        <p>The <code>phi.js</code> module exports the canonical φ constant set used by every Heady service. Import this module — never hardcode numerical values.</p>
+      </div>
+      <div class="code-block">
+<span class="hl-comment">// phi.js — canonical exports</span>
+<span class="hl">export const</span> PHI  = <span class="hl-amber">1.618033988749895</span>;
+<span class="hl">export const</span> PSI  = <span class="hl-amber">0.618033988749895</span>;  <span class="hl-comment">// 1/φ</span>
+<span class="hl">export const</span> PSI2 = <span class="hl-amber">0.381966011250105</span>;  <span class="hl-comment">// ψ²</span>
+<span class="hl">export const</span> PHI2 = <span class="hl-amber">2.618033988749895</span>;  <span class="hl-comment">// φ²</span>
+<span class="hl">export const</span> SQPHI = <span class="hl-amber">1.272019649514069</span>; <span class="hl-comment">// √φ</span>
+
+<span class="hl">export const</span> TIMING = {
+  FAST:   Math.round(PHI ** <span class="hl-amber">3</span> * <span class="hl-amber">1000</span>),  <span class="hl-comment">// 4,236ms</span>
+  NORMAL: Math.round(PHI ** <span class="hl-amber">5</span> * <span class="hl-amber">1000</span>),  <span class="hl-comment">// 11,090ms</span>
+  LONG:   Math.round(PHI ** <span class="hl-amber">8</span> * <span class="hl-amber">1000</span>),  <span class="hl-comment">// 46,979ms</span>
+};
+
+<span class="hl">export const</span> CSL_GATES = {
+  SUPPRESS:  <span class="hl-amber">0.236</span>,
+  INCLUDE:   <span class="hl-amber">0.382</span>,
+  BOOST:     <span class="hl-amber">0.618</span>,
+  INJECT:    <span class="hl-amber">0.718</span>,
+  HIGH:      <span class="hl-amber">0.882</span>,
+  CRITICAL:  <span class="hl-amber">0.927</span>,
+};
+
+<span class="hl">export const</span> FIB = [<span class="hl-amber">1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987</span>];
+      </div>
+    </section>
+
+    <!-- 04.3 Patents -->
+    <section class="doc-section" id="patents">
+      <div class="section-label">04.3 — Reference</div>
+      <div class="section-title">Provisional Patent Portfolio</div>
+      <div class="section-body">
+        <p>HeadyAI's novel architectural contributions are protected by a portfolio of <strong>60+ provisional patents</strong> covering core innovations in AI orchestration, cognitive architecture, and sacred geometry-derived computing. The following are the primary patent domains.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Continuous Semantic Logic</h3>
+          <p>CSL AND/OR/NOT/IMPLY/GATE operations on continuous probability weights as a replacement for boolean AI decision logic.</p>
+        </div>
+        <div class="card">
+          <h3>Liquid Nodes Architecture</h3>
+          <p>Method for latent-state service instantiation in AI systems using vector space coordinates and shadow memory persistence.</p>
+        </div>
+        <div class="card">
+          <h3>φ-Governed System Scaling</h3>
+          <p>Application of Golden Ratio and Fibonacci sequences as exclusive numerical constants in distributed computing system design.</p>
+        </div>
+        <div class="card">
+          <h3>Sacred Geometry Topology</h3>
+          <p>Concentric ring architectural pattern for AI service boundary definition derived from sacred geometric forms.</p>
+        </div>
+        <div class="card">
+          <h3>VSA-Based AI Memory</h3>
+          <p>High-dimensional vector symbolic architecture as a replacement for relational memory in multi-agent AI systems.</p>
+        </div>
+        <div class="card">
+          <h3>Infinite Recursive Ascension</h3>
+          <p>Self-optimization loop protocol enabling autonomous AI systems to perpetually audit and improve their own logic patterns.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-copy">© 2025 HeadyConnection Inc. — HeadyAI · Layer 1 Vesica Piscis · CSL Engine · φ = 1.618… · 60+ Provisional Patents</div>
+    <div class="footer-links">
+      <a href="https://headyme.com">HeadyMe</a>
+      <a href="https://headysystems.com">HeadySystems</a>
+      <a href="https://headyconnection.org">HeadyConnection</a>
+      <a href="https://headybuddy.org">HeadyBuddy</a>
+      <a href="https://headymcp.com">HeadyMCP</a>
+      <a href="https://headyio.com">HeadyIO</a>
+      <a href="https://headybot.com">HeadyBot</a>
+      <a href="https://headyapi.com">HeadyAPI</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.doc-section[id]');
+  const navLinks = document.querySelectorAll('.sidebar-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
